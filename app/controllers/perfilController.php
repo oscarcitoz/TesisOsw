@@ -2,6 +2,15 @@
 
 class perfilController extends BaseController {
 
+
+		public function __construct()
+	{
+		$this->beforeFilter('auth');		
+			
+	}
+
+
+
 	function index()
 	{
 		$usuario=Auth::user();
@@ -60,6 +69,13 @@ class perfilController extends BaseController {
 					return Redirect::to('/perfil/changePassword')->with('message','Contraseña Actual incorrecta');
 				}
 
+		}
+
+		function exportar()
+		{
+			$exportar=Input::get('exportar');
+			echo $exportar;
+			return View::make('users/reporte', array('exportar' => $exportar,));
 		}
 		
 }

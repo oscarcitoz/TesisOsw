@@ -29,9 +29,15 @@ Route::post('/authenticate',array('uses'=>'HomeController@authenticate','before'
 
 Route::get('/perfil', 'perfilController@index');
 Route::get('/perfil/changePassword', 'perfilController@passwordEdit');
+Route::post('/perfil/exportar', 'perfilController@exportar');
+
+
 Route::post('/perfil/updatePassword', 'perfilController@passwordUpdate');
+
+
 
 Route::get('/empresa', 'HomeController@empresa');
 Route::get('/consultora', 'HomeController@consultora');
 Route::get('/proyecto', 'HomeController@proyecto');
 
+Route::controller('password', 'RemindersController');

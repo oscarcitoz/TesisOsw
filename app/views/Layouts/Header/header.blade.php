@@ -5,6 +5,14 @@
  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" media="screen">
     <link rel="stylesheet" href="{{asset('css/bootswatch.css')}}">
 
+<style>
+
+.azulito{
+
+color:#044586; font-weight:bold;
+
+}
+</style>
   @show
    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
