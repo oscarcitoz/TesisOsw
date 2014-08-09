@@ -73,11 +73,12 @@ class CreateShema extends Migration {
 
     	Schema::create('projects', function($table){
 	        $table->increments('id');
+	        $table->integer('user_id')->unsigned();
 	        $table->integer('types_project_id')->unsigned();
 	        $table->integer('customer_id')->unsigned();
 	        $table->string('description',255);
-	        $table->integer('status');
-	        $table->integer('amount_contract');
+	        $table->string('status',50);
+	        $table->double('amount_contract');
 	        $table->string('document_budget',255);
 	        $table->string('name',255);
 	        $table->string('locality',15);
@@ -135,6 +136,7 @@ class CreateShema extends Migration {
     	Schema::table('projects', function($table) {
         	$table->foreign('types_project_id')->references('id')->on('types_projects');
         	$table->foreign('customer_id')->references('id')->on('customers');
+        	$table->foreign('user_id')->references('id')->on('users');
     	});
 
     	Schema::table('activities', function($table) {
@@ -179,6 +181,7 @@ class CreateShema extends Migration {
         Schema::table('projects', function($table) {
                 $table->dropForeign('projects_types_project_id_foreign');
                 $table->dropForeign('projects_customer_id_foreign');
+                $table->dropForeign('projects_user_id_foreign');
         });
 
         Schema::table('activities', function($table) {

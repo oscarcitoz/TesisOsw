@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder {
 
 		DB::table('users')->delete();
 
-		$pass= Hash::make("20151526");
+		$pass= Hash::make("123456789");
 
 		$usuario1 = array('role_id'=> $admin_role,'email'=> "mamaOswaldo@hotmail.com",'password'=>$pass,'status'=>1,'flag'=>1, 'created_at' => $now,'updated_at' => $now,);
 		$usuario2 = array('role_id'=> $user_role,'email'=> "oswaldo@hotmail.com",'password'=>$pass,'status'=>1,'flag'=>1,'created_at' => $now,'updated_at' => $now,);

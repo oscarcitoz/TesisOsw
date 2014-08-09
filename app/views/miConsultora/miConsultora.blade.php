@@ -24,7 +24,7 @@ Mi Consultora
 @if ($project->count()>0)
 	@foreach ($project as $pro)
 		<div class="table-responsive text-muted">
-			<a class="text-muted" href="#" onclick="window.open('{{URL::to('/consultora/more')}}')">
+			<a class="text-muted" href="#" >
 			<table class="table" >
 				<tr class="success" >
 					<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/Proyecto.jpg')}}" alt="Smiley face" ></td>
@@ -49,7 +49,7 @@ Mi Consultora
 			</tr>
 	</table>
 @endif
-
+	<button type="button" class="btn btn-primary" onclick="window.open('{{URL::to('/consultora/more')}}')">Mostrar Todos Los Proyectos</button>
 </div>
 <div name="izq" id="Dizq2" class="oculta">
 

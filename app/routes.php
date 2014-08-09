@@ -20,7 +20,7 @@ Route::get('/', function()
 
 
 
-Route::get('/',array('uses'=>'HomeController@consultora','before'=>'auth'));
+
 Route::get('/login',array('uses'=>'HomeController@login','before'=>'guest'));
 Route::get('/logout',array('uses'=>'HomeController@logout','before'=>'auth'));
 Route::post('/authenticate',array('uses'=>'HomeController@authenticate','before'=>'guest'));
@@ -34,10 +34,17 @@ Route::post('/perfil/exportar', 'perfilController@exportar');
 
 Route::post('/perfil/updatePassword', 'perfilController@passwordUpdate');
 
+//Mi Consultora
+Route::get('/',array('uses'=>'ProjectController@consultora','before'=>'auth'));
+Route::get('/consultora',array('uses'=>'ProjectController@consultora','before'=>'auth'));
+Route::get('/consultora/more',array('uses'=>'ProjectController@consultora_project','before'=>'auth'));
+
+
 
 
 Route::get('/empresa', 'HomeController@empresa');
-Route::get('/consultora', 'HomeController@consultora');
+
+
 Route::get('/proyecto', 'HomeController@proyecto');
 
 Route::controller('password', 'RemindersController');
