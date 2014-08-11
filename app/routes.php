@@ -29,8 +29,12 @@ Route::post('/authenticate',array('uses'=>'HomeController@authenticate','before'
 
 Route::get('/perfil', 'perfilController@index');
 Route::get('/perfil/changePassword', 'perfilController@passwordEdit');
-Route::post('/perfil/exportar', 'perfilController@exportar');
 
+Route::post('/perfil/storeCurriculum', 'perfilController@storeCurriculum');
+Route::get('/perfil/curriculum', 'perfilController@indexCurriculum');
+Route::get('/perfil/datosPersonales/modificar', 'userController@edit');
+Route::get('/perfil/datosPersonales', 'perfilController@indexDatosPersonales');
+Route::post('/perfil/updateDatosPersonales', 'userController@update');
 
 Route::post('/perfil/updatePassword', 'perfilController@passwordUpdate');
 

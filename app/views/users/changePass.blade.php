@@ -79,14 +79,8 @@ Perfil
 </div>
 
 
-
-
 </div>
-<div name="izq" id="Dizq2" class="oculta">
-<h2> DIV 2</h2>
-</div>
-<div name="izq" id="Dizq3" class="oculta">
-<h2> DIV 3</h2>
-</div>
+@include('ventanas.perfil.divzq2')
+@include('ventanas.perfil.divzq3')
 <br/>
   @stop  

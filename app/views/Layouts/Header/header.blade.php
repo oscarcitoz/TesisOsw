@@ -31,10 +31,13 @@ color:#044586; font-weight:bold;
  $(document).ready(function(){
 
 var menu2='{{$menu}}';
-
-$('#'+menu2).addClass( "active" )
-
-
+$('#'+menu2).addClass( "active" );
+ 
+@if (isset($menuIzq)) 
+var menuIzq='{{$menuIzq}}';
+  $('#Dizq'+menuIzq).removeClass("oculta");
+  $('#izq'+menuIzq).addClass( "active" );
+@endif
 });  
 
 </script>

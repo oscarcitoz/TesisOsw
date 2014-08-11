@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder {
 		$pass= Hash::make("20151526");
 
 		$usuario1 = array('role_id'=> $admin_role,'email'=> "mamaOswaldo@hotmail.com",'password'=>$pass,'status'=>1,'flag'=>1, 'created_at' => $now,'updated_at' => $now,);
-		$usuario2 = array('role_id'=> $user_role,'email'=> "oswaldo@hotmail.com",'password'=>$pass,'status'=>1,'flag'=>1,'created_at' => $now,'updated_at' => $now,);
+		$usuario2 = array('role_id'=> $user_role,'email'=> "proskate55@hotmail.com",'password'=>$pass,'status'=>1,'flag'=>1,'created_at' => $now,'updated_at' => $now,);
 		$usuario3 = array('role_id'=> $mod_role,'email'=> "mariaGabriela@hotmail.com",'password'=>$pass,'status'=>1,'flag'=>1,'created_at' => $now,'updated_at' => $now,);
 		
 		// Uncomment the below to run the seeder

@@ -16,17 +16,42 @@ class perfilController extends BaseController {
 		$usuario=Auth::user();
 		$login=$usuario->email;
 		$perfil=$usuario->role()->first()->name;
-		$nombre=$usuario->employee()->first()->first_name;
+		$empleado=$usuario->employee()->first();
+		$nombre=$empleado->first_name;
+		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'1'));
 
-		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,));
+	}
+
+	function indexCurriculum()
+	{
+		$usuario=Auth::user();
+		$login=$usuario->email;
+		$perfil=$usuario->role()->first()->name;
+		$empleado=$usuario->employee()->first();
+		$nombre=$empleado->first_name;
+		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'3'));
+
+	}
+
+
+	function indexDatosPersonales()
+	{
+		$usuario=Auth::user();
+		$login=$usuario->email;
+		$perfil=$usuario->role()->first()->name;
+		$empleado=$usuario->employee()->first();
+		$nombre=$empleado->first_name;
+		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'2'));
 
 	}
 
 	public function passwordEdit()
 	{
 		$usuario=Auth::user();
-		$nombre=$usuario->employee()->first()->first_name;
-		return View::make('users/changePass', array('menu' => '2','nombre'=>$nombre,));
+		$login=$usuario->email;
+		$empleado=$usuario->employee()->first();
+		$nombre=$empleado->first_name;
+		return View::make('users/changePass', array('menu' => '2','nombre'=>$nombre,'empleado'=>$empleado,'login'=>$login,'menuIzq'=>'1'));
 	}
 	public function passwordUpdate()
 	{
@@ -71,11 +96,46 @@ class perfilController extends BaseController {
 
 		}
 
-		function exportar()
-		{
-			$exportar=Input::get('exportar');
-			echo $exportar;
-			return View::make('users/reporte', array('exportar' => $exportar,));
-		}
+
+
+			public function storeCurriculum()
+	{
+		//
+		$rules=array('curriculum'=>'required|mimes:pdf');
+		$validator=Validator::make(Input::all(),$rules);
+
+		if(!$validator->fails())
+			{
+				
+			try
+				{
+
+					$usuario=Auth::user();
+					$empleado=$usuario->employee()->first();
+					$empleado->deleteArchivo();
+					$empleado->subir(Input::file('curriculum'));
+					$affectedRows = Employee::where('user_id', '=', $empleado->user_id)->update(array('curriculum' => $empleado->curriculum));
+					return Redirect::to('/perfil/curriculum');
+
+				}
+
+			catch (Exception $e) {
+				return Redirect::to('/perfil/curriculum')->with('error',$e->getMessage())->withInput();
+
+			}
+
+
+			}
+			else
+			{
+				return Redirect::to('/perfil/curriculum')->with('error','Formato de archivo incorrecto')->withInput()->withErrors($validator);
+			}
+
+
+		
+
+	}
+
+
 		
 }
