@@ -37,8 +37,8 @@ Route::post('/perfil/updatePassword', 'perfilController@passwordUpdate');
 //Mi Consultora
 Route::get('/',array('uses'=>'ProjectController@consultora','before'=>'auth'));
 Route::get('/consultora',array('uses'=>'ProjectController@consultora','before'=>'auth'));
-Route::get('/consultora/more',array('uses'=>'ProjectController@consultora_project','before'=>'auth'));
-
+Route::get('/consultora/more_project',array('uses'=>'ProjectController@consultora_project','before'=>'auth'));
+Route::get('/consultora/more_activity',array('uses'=>'ActivityController@consultora_activity','before'=>'auth'));
 
 
 

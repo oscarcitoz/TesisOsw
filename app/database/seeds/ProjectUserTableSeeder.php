@@ -25,7 +25,7 @@ class ProjectUserTableSeeder extends Seeder {
                                         ->first()
                                         ->id;
 
-     $projects_id4 = DB::table('projects')
+        $projects_id4 = DB::table('projects')
                                         ->select('id')
                                         ->where('name', 'Proyecto numero 4')
                                         ->first()

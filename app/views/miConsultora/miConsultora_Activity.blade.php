@@ -7,6 +7,15 @@ Mi Consultora
 Mi Consultora
   @stop  
 
+@section('scripts')
+ @parent
+<script type="text/javascript">
+$(document).ready(function() {
+   $('#izq1').removeClass("active");
+   $('#izq2').addClass("active");
+});
+</script>
+  @stop
 
 @section('menuPrincipal')
 @include('Layouts.Menu.menuPrincipal')
@@ -19,15 +28,17 @@ Mi Consultora
 
 @section('contenido')
 
-<div name="izq" id="Dizq1">
+<div name="izq" id="Dizq1" class="oculta">
+
+{{Form::open(array('url'=>'/consultora/more_project','method'=>'GET'))}}
 	<div style='font-size:16;'>
-	<ul class="breadcrumb">
-	  <li><a href="{{URL::to('/consultora')}}">Ultimos 5 Proyectos</a></li>
-	  <li class="active">Todos Los Proyectos</li>
-	</ul>
+		<ul class="breadcrumb">
+		  <li>Ultimos 5 Proyectos</li>
+		</ul>
 	</div>
 
-	    @foreach ($project as $pro)
+@if ($count_project>0)
+	@foreach ($project as $pro)
 		<div class="table-responsive text-muted">
 			<a class="text-muted" href="#" >
 			<table class="table" >
@@ -47,21 +58,30 @@ Mi Consultora
 		</div> 
 
 	@endforeach
-	
-		{{$project->links()}}
+@else
+	<table class="table" >
+			<tr class="danger">
+				<td><strong>No existe ningun registro</strong></td>
+			</tr>
+	</table>
+@endif
+@if ($count_project>5)
+	<input type="submit" class="btn btn-primary" value="Mostrar Todos Los Proyectos">
+@endif
+
+{{Form::close()}}
 	
 </div>
 
+<div name="izq" id="Dizq2" >
 
-<div name="izq" id="Dizq2" class="oculta">
-{{Form::open(array('url'=>'/consultora/more_activity','method'=>'GET'))}}
 	<div style='font-size:16;'>
 		<ul class="breadcrumb">
 		  <li>Ultimas 5 Actividades</li>
 		</ul>
 	</div>
 	
-@if ($count_activity>0)
+
 	@foreach ($activity as $act)
 		<div class="table-responsive">
 			<a class="text-muted" href="#">
@@ -81,19 +101,10 @@ Mi Consultora
 			</a>
 		</div>    
 	@endforeach
-@else
-	<table class="table" >
-			<tr class="danger">
-				<td><strong>No existe ningun registro</strong></td>
-			</tr>
-	</table>
-@endif
 
-@if ($count_activity>5)
-	<input type="submit" class="btn btn-primary" value="Mostrar Todas Las Actividades">
-@endif
 
-{{Form::close()}}
+{{$activity->links()}}
+
 </div>
 
 <br/>

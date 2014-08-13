@@ -7,6 +7,14 @@ Mi Consultora
 Mi Consultora
   @stop  
 
+@section('scripts')
+ @parent
+<script type="text/javascript">
+$(document).ready(function() {
+$('#myModal').modal('show');
+});
+</script>
+  @stop
 
 @section('menuPrincipal')
 @include('Layouts.Menu.menuPrincipal')
@@ -19,11 +27,40 @@ Mi Consultora
 
 
 @section('contenido')
-<div name="izq" id="Dizq1">
 
-@if ($project->count()>0)
+
+<!-- Modal -->
+{{Form::open(array('url'=>'/perfil','method'=>'GET'))}}
+ <div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Bienvenido</h4>
+      </div>
+      <div class="modal-body">
+        <p>Es necesario que llenar sus datos antes de empezar. Para ello diríjase a perfil o de clic en el botón.</p>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Ir a mi Perfil">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{{Form::close()}}
+
+
+<div name="izq" id="Dizq1">
+{{Form::open(array('url'=>'/consultora/more_project','method'=>'GET'))}}
+	<div style='font-size:16;'>
+		<ul class="breadcrumb">
+		  <li>Ultimos 5 Proyectos</li>
+		</ul>
+	</div>
+
+@if ($count_project>0)
 	@foreach ($project as $pro)
-		<div class="table-responsive text-muted">
+		<div class="table-responsive">
 			<a class="text-muted" href="#" >
 			<table class="table" >
 				<tr class="success" >
@@ -35,12 +72,11 @@ Mi Consultora
 					<td colspan="2"><strong>Localidad: </strong>{{$pro->locality}}</td>
 				</tr>
 				<tr class="success">
-					<td colspan="2"><strong>Lider: </strong>{{$pro->user()->first()->employee()->first()->first_name}}</td>
+					<td colspan="2"><strong>Lider: </strong>{{$pro->first_name}}</td>
 				</tr>
 			</table>
 			</a>
 		</div> 
-
 	@endforeach
 @else
 	<table class="table" >
@@ -49,27 +85,43 @@ Mi Consultora
 			</tr>
 	</table>
 @endif
-	<button type="button" class="btn btn-primary" onclick="window.open('{{URL::to('/consultora/more')}}')">Mostrar Todos Los Proyectos</button>
-</div>
-<div name="izq" id="Dizq2" class="oculta">
+@if ($count_project>5)
+	<input type="submit" class="btn btn-primary" value="Mostrar Todos Los Proyectos">
+@endif
 
-@if ($activity->count()>0)
-{{$activity}}
+{{Form::close()}}
+</div>
+
+
+<!-- ACTIVIDADES-->
+
+
+<div name="izq" id="Dizq2" class="oculta">
+{{Form::open(array('url'=>'/consultora/more_activity','method'=>'GET'))}}
+	<div style='font-size:16;'>
+		<ul class="breadcrumb">
+		  <li>Ultimas 5 Actividades</li>
+		</ul>
+	</div>
+	
+@if ($count_activity>0)
 	@foreach ($activity as $act)
 		<div class="table-responsive">
-			<table class="table" >
-				<tr class="success" >
-					<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/Proyecto.jpg')}}" alt="Smiley face" ></td>
-					<td  width="80%"><strong>{{$act->name}}</strong></td>
-					<td  width="10%"><a  href="#">Propuesta</a></td>
-				</tr>
-				<tr class="success">
-					<td colspan="2">Localidad: {{$act->description}}</td>
-				</tr>
-				<tr class="success">
-					<td colspan="2">Lider</td>
-				</tr>
-			</table>
+			<a class="text-muted" href="#">
+				<table class="table" >
+					<tr class="success" >
+						<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/activi.jpg')}}" alt="Smiley face" ></td>
+						<td  width="80%"><strong>{{$act->name}}</strong></td>
+						<td  width="10%">{{$act->status}}</td>
+					</tr>
+					<tr class="success">
+						<td colspan="2">Fecha Propuesta: {{$act->date_proposal}}</td>
+					</tr>
+					<tr class="success">
+						<td colspan="2">Descripción de la Actividad: {{$act->description}}</td>
+					</tr>
+				</table>
+			</a>
 		</div>    
 	@endforeach
 @else
@@ -80,6 +132,11 @@ Mi Consultora
 	</table>
 @endif
 
+@if ($count_activity>5)
+	<input type="submit" class="btn btn-primary" value="Mostrar Todos Las Actividades">
+@endif
+
+{{Form::close()}}
 </div>
 
 <br/>
