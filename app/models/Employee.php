@@ -13,7 +13,6 @@ class Employee extends Eloquent {
 	private $public_path;
 	private $basedir;
 
-
 	public function subir($archivo=null)
 	{
 		$this->public_path=public_path().DIRECTORY_SEPARATOR;

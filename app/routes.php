@@ -29,18 +29,31 @@ Route::post('/authenticate',array('uses'=>'HomeController@authenticate','before'
 
 Route::get('/perfil', 'perfilController@index');
 Route::get('/perfil/changePassword', 'perfilController@passwordEdit');
-
 Route::post('/perfil/storeCurriculum', 'perfilController@storeCurriculum');
 Route::get('/perfil/curriculum', 'perfilController@indexCurriculum');
 Route::get('/perfil/datosPersonales/modificar', 'userController@edit');
 Route::get('/perfil/datosPersonales', 'perfilController@indexDatosPersonales');
 Route::post('/perfil/updateDatosPersonales', 'userController@update');
-
 Route::post('/perfil/updatePassword', 'perfilController@passwordUpdate');
 
 
 
-Route::get('/empresa', 'HomeController@empresa');
+Route::get('/empresa', 'CustomerController@index');
+Route::get('/empresa/modificar', 'CustomerController@edit');
+Route::post('/empresa/update', 'CustomerController@update');
+Route::post('/empresa/create', 'UserController@store');
+
+Route::post('/empresa/show', 'UserController@show');
+Route::get('/empresa/buscar/nombre', 'UserController@buscarNombre');
+Route::get('/empresa/buscar/cedula', 'UserController@buscarCedula');
+Route::get('/empresa/buscar/profesion', 'UserController@buscarProfesion');
+Route::get('/empresa/verUsuario/{id}','UserController@verUsuario');
+
+Route::get('/empresa/registrar', 'CustomerController@indexRegistrar');
+
+
+
+
 Route::get('/consultora', 'HomeController@consultora');
 Route::get('/proyecto', 'HomeController@proyecto');
 

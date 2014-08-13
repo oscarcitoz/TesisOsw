@@ -107,7 +107,7 @@ $(function() {
 <fieldset class="form-group col-md-5">
 {{Form::label('email', 'Email: ')}}
 @if($errors->has('email'))
-    {{Form::label('email',$errors->first('email'),array('class'=>'label label-warning'))}}
+    {{Form::email('email',$errors->first('email'),array('class'=>'label label-warning'))}}
     @endif
 {{Form::email('email', $login, array('class'=>'form-control','disabled',"required"=>"true"))}}
 </fieldset>
@@ -241,15 +241,10 @@ $(function() {
 @if ($empleado->photo!==null)
 <div class="alert alert-dismissable alert-info  col-md-5">
   <button type="button" class="close" data-dismiss="alert">×</button>
-Foto Actual ----->&nbsp; <IMG SRC="{{asset($empleado->photo)}}" class="img-thumbnail" height="100" width="100"></div>
+Foto Actual ----->&nbsp; <IMG SRC="{{asset($empleado->photo)}}" class="img-thumbnail" height="100" width="100">
+</div>
 @endif
 </div>
-
-
-
-
-
-
 
 
 <fieldset class="form-group col-md-5 col-md-offset-4">

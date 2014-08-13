@@ -76,11 +76,5 @@ class HomeController extends BaseController {
 		return View::make('ventanas.miConsultora', array('menu' => '1','nombre'=>$nombre,));
 	}
 
-		public function empresa()
-	{
-		$usuario=Auth::user();
-		$nombre=$usuario->employee()->first()->first_name;
-		return View::make('ventanas.empresa', array('menu' => '4','nombre'=>$nombre,));
-	}
 
 }
