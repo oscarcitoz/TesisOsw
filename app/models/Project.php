@@ -17,6 +17,11 @@ class Project extends Eloquent {
         return $this->belongsToMany('User')->withPivot('date_create');
     }
 
+    public function usero()
+    {
+        return $this->belongsTo('User');
+    }
+
     public function Documents_project(){
 		return $this->hasMany('Documents_project');
 	}

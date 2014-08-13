@@ -53,8 +53,12 @@ Route::get('/empresa/registrar', 'CustomerController@indexRegistrar');
 
 
 
+//Mi Consultora
+Route::get('/',array('uses'=>'ProjectController@consultora','before'=>'auth'));
+Route::get('/consultora',array('uses'=>'ProjectController@consultora','before'=>'auth'));
+Route::get('/consultora/more_project',array('uses'=>'ProjectController@consultora_project','before'=>'auth'));
+Route::get('/consultora/more_activity',array('uses'=>'ActivityController@consultora_activity','before'=>'auth'));
 
-Route::get('/consultora', 'HomeController@consultora');
 Route::get('/proyecto', 'HomeController@proyecto');
 
 Route::controller('password', 'RemindersController');
