@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'consultoraintegralldt.c.a@gmail.com', 'name' => 'Consultora'),
+	'from' => array('address' => 'registro.ci.ldt@gmail.com', 'name' => 'Consultora'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'consultoraintegralldt.c.a@gmail.com',
+	'username' => 'registro.ci.ldt@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'librada77',
+	'password' => 'V20801079',
 
 	/*
 	|--------------------------------------------------------------------------
