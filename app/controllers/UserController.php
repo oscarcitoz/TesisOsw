@@ -133,7 +133,8 @@ class UserController extends BaseController
 		if($usuario!==null){
 		$empleado=$usuario->employee()->first();
 		$login=$usuario->email;
-		return View::make('users.show', array('empleado'=>$empleado,'login'=>$login));
+		$status=$usuario->status;
+		return View::make('users.show', array('empleado'=>$empleado,'login'=>$login,'id'=>$id,'status'=>$status));
 		}
 		else{
 		echo "NO encontrado";}
@@ -142,6 +143,31 @@ class UserController extends BaseController
 				echo "ERROR! ".$e->getMessage();
 
 			}
+
+	}
+
+	public function actualizaStatus()
+	{
+		 if(Request::ajax()){
+		 	$id= Input::get('id');
+		 	try{
+		$usuario=User::where('id', '=',  $id)->first();
+		$statusIni=$usuario->status;
+		if ($statusIni ==1)
+		{
+			$usuario->status=0;
+		}
+		else {
+			$usuario->status=1;
+		}
+		$usuario->save();
+		}catch (Exception $e) {
+
+				echo "ERROR! ".$e->getMessage();
+
+			}
+		 }
+		return $usuario->status;
 
 	}
 	public function store(){

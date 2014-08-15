@@ -48,7 +48,7 @@ Route::get('/empresa/buscar/nombre', 'UserController@buscarNombre');
 Route::get('/empresa/buscar/cedula', 'UserController@buscarCedula');
 Route::get('/empresa/buscar/profesion', 'UserController@buscarProfesion');
 Route::get('/empresa/verUsuario/{id}','UserController@verUsuario');
-
+Route::post('empresa/actualizaStatus','UserController@actualizaStatus');
 Route::get('/empresa/registrar', 'CustomerController@indexRegistrar');
 
 

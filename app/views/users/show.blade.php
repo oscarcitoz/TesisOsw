@@ -45,6 +45,31 @@ Usuario
  
     return myWindow;
 }
+
+function cambiarStatus()
+{
+ urlA= "{{URL::to('/empresa/actualizaStatus')}}";
+ var id={{$id}};
+$.ajax({
+  type: "POST",
+  url: urlA,
+  data: { id: id }
+})
+  .done(function( msg ) {
+     $('#stat').hide();
+    if(msg ==1)
+    {
+     
+      $('#data').html("<div class='alert alert-dismissable alert-info'  id='stat'><span><strong>Status:</strong> Activo</span></div>");
+    }
+
+    else {
+        $('#data').html("<div class='alert alert-dismissable alert-warning'  id='stat'><span id='stat'><strong>Status:</strong> Inactivo</span></div>");
+    }
+  }) .fail(function() {
+    alert( "Ha ocurrido un error Inesperado, intente nuevamente" );
+  });
+}
 </script>
  @stop
 @section('container')
@@ -84,12 +109,34 @@ Usuario
     <td ><span class='azulito'>Tel&eacute;fono Cel</span>&nbsp;{{$empleado->phone_cel}}</td>
   </tr>
 </table>
+<div class='col-md-3'>
+@if($status==1)
+<div class="alert alert-dismissable alert-info"  id='stat'>
+<span>
+<strong>Status:</strong> 
+Activo
+</span>
+</div>
+@else 
+<div class="alert alert-dismissable alert-warning"  id='stat'>
+<span id='stat'>
+  <strong>Status:</strong> 
+Inactivo
+</span>
+</div>
+@endif
+<div id='data'>
+</div>
+<br/>
+</div>
 </div>
 </div>
 </div>
 <div class="row">
 	<div class='col-md-6 col-md-offset-4'>
 <a href="#" onclick="reporte()" class="btn btn-info btn-default">Reporte</a>
+<a href="#" onclick="cambiarStatus()" class="btn btn-info btn-default">Cambiar Status</a>
+
 <a class="btn btn-info btn-default" href="{{asset($empleado->curriculum)}}" target="_blank">Ver Curriculum</a>
 </div>
 </div>
