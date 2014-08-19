@@ -62,12 +62,7 @@ class HomeController extends BaseController {
 
 
 
-		public function proyecto()
-	{
-		$usuario=Auth::user();
-		$nombre=$usuario->employee()->first()->first_name;
-		return View::make('ventanas.proyecto', array('menu' => '3','nombre'=>$nombre,));
-	}
+
 
 		public function consultora()
 	{

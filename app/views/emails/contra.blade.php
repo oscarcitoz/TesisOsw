@@ -7,7 +7,11 @@
 	 	
      Hola {{ $customer }},
     Ha sido registrado Correctamente al aplicativo de la consultora. Su password para ingresar es {{ $pass }}.
-	 
-	 Por favor procura cambiar tu clave de acceso cuando puedas. Gracias.
+	
+	Es importante al momento de realizar el resgistrotener los siguientes recaudos en digital para ser cargados en su perfil:
+		- Curriculum en formato PDF.
+		- Foto de Perfil en formato JPG
+
+	Por favor procura cambiar tu clave de acceso cuando puedas. Gracias.
 
 </body>

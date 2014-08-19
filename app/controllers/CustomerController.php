@@ -91,6 +91,25 @@ class CustomerController extends BaseController {
 
 	}
 
+	public function buscarCustomer(){
+
+		if((isset($_GET['term'])))
+		{
+			$name=$_GET['term'];
+			$customer=Customer::where('name', 'LIKE', '%'.$name.'%')
+			->where('id','!=','1')
+			->get()->toJson();
+			return $customer;
+		}
+	}
+
+	public function CrearCustomer(){
+		$usuario=Auth::user();
+		$empleado=$usuario->employee()->first();
+		$nombre=$empleado->first_name;
+		return View::make('ventanas.customer',  array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'1'));		
+	}
+
 
 
 }

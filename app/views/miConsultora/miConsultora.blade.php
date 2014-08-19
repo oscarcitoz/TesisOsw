@@ -10,7 +10,7 @@ Mi Consultora
 @section('scripts')
  @parent
 <script type="text/javascript">
-$(document).ready(function() {
+$(function() {
 $('#myModal').modal('show');
 });
 </script>
@@ -64,7 +64,7 @@ $('#myModal').modal('show');
 			<a class="text-muted" href="#" >
 			<table class="table" >
 				<tr class="success" >
-					<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/Proyecto.jpg')}}" alt="Smiley face" ></td>
+					<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/Proyecto.jpg')}}" alt="Proyecto" ></td>
 					<td  width="80%"><strong>Nombre del Proyecto: </strong>{{$pro->name}}</td>
 					<td  width="10%"><strong>{{$pro->status}}</strong></td>
 				</tr>

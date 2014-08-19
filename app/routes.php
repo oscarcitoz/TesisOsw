@@ -59,6 +59,19 @@ Route::get('/consultora',array('uses'=>'ProjectController@consultora','before'=>
 Route::get('/consultora/more_project',array('uses'=>'ProjectController@consultora_project','before'=>'auth'));
 Route::get('/consultora/more_activity',array('uses'=>'ActivityController@consultora_activity','before'=>'auth'));
 
-Route::get('/proyecto', 'HomeController@proyecto');
+//proyecto
+Route::get('/proyecto', 'ProjectController@proyecto');
+Route::get('/proyecto/buscar/proyecto', 'ProjectController@buscarProyect');
+Route::get('/proyecto/buscar/local', 'ProjectController@buscarLocal');
+Route::post('/proyecto/buscar/tipo', 'ProjectController@buscarTipo');
+Route::post('/proyecto/buscar/status', 'ProjectController@buscarStatus');
+Route::post('/proyecto/create', 'ProjectController@create');
+Route::get('/project/registrar', 'ProjectController@proyectoReg');
+
+//customer
+Route::get('/customer/buscar/customer', 'CustomerController@buscarCustomer');
+Route::get('/customer/crear', 'CustomerController@CrearCustomer');
+
+
 
 Route::controller('password', 'RemindersController');
