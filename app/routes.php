@@ -71,7 +71,12 @@ Route::get('/project/registrar', 'ProjectController@proyectoReg');
 //customer
 Route::get('/customer/buscar/customer', 'CustomerController@buscarCustomer');
 Route::get('/customer/crear', 'CustomerController@CrearCustomer');
+Route::post('/customer/registrar', 'CustomerController@RegistrarCustomer');
+Route::get('/customer/edtiCustomer/{id}','CustomerController@editCustomer');
+Route::post('/customer/update','CustomerController@updateCustomer');
 
+//Proyectos Individuales
+Route::get('/project/individual/{id}','ProjectController@proyectoIndividual');
 
 
 Route::controller('password', 'RemindersController');

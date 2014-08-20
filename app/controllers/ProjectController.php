@@ -1,5 +1,5 @@
 <?php
-
+ 
 class ProjectController extends BaseController 
 {
 
@@ -186,6 +186,13 @@ public function proyectoReg()
 		}
 	}
 
+	public function proyectoIndividual($id)
+	{
+		$Project=Project::find($id);
+		$usuario=Auth::user();
+		$nombre=$usuario->employee()->first()->first_name;	
+		return View::make('ventanas.proyectoIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'1','project'=>$Project));
+	}
 }
 
 

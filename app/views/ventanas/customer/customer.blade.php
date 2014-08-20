@@ -1,26 +1,50 @@
-@extends('Layouts.layout')
+@extends('Layouts.layout2')
 @section('title')
-Registrar Cliente
+Usuario
   @stop
-
-@section('pestania')
-Registrar Cliente
-  @stop  
 
 @section('scripts')
  @parent
- <script type="text/javascript">
+<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript">
 </script>
-  @stop  
+ @stop
+@section('container')
+ 
+
+<ul class="breadcrumb">
+  <li class="active">Crear Nuevo Cliente</li>
+</ul>
+@if(Session::has('messageRegistrar'))
+<div class="alert alert-dismissable alert-info">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Registro Completo!</strong> {{Session::get('messageRegistrar')}}
+</div>
+@endif
+
+@if(Session::has('messageRegistrar2'))
+<div class="alert alert-dismissable alert-warning">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Registro Completo!</strong> {{Session::get('messageRegistrar2')}}
+</div>
+@endif
+
+@if(Session::has('messageErrorRegis'))
+
+<div class="row">
+
+<div class=" alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Oh Error!</strong> {{Session::get('messageErrorRegis')}}
+</div>
+</div>
+@endif
 
 
-
-
-@section('contenido')
 
 
 <div class=​"well bs-component">​
-{{Form::open(array('url'=>'','method'=>'post', 'id'=>'formulario_project'))}}
+{{Form::open(array('url'=>'/customer/registrar','method'=>'post', 'id'=>'formulario_project'))}}
 
 <div class="row">
 <fieldset class="form-group col-md-5">
@@ -104,4 +128,5 @@ Registrar Cliente
 
 
 <br/>
-  @stop   
+
+@stop 

@@ -89,7 +89,7 @@ $( "#tags1" ).keydown(function(tecla){
        					if(data=="")
        						return $("#respuesta").html("<div class='alert alert-dismissable alert-danger'> <button type='button' class='close' data-dismiss='alert'>×</button> <h4>Error!</h4> <p> No se han encontrado registros. </p></div>");
                 response($.map(data, function(item) {
-                var registro="<div class='table-responsive'><a class='text-muted' href='#' ><table class='table' width='100%'>"
+                var registro="<div class='table-responsive'><a class='text-muted' href='{{URL::to('/project/individual')}}"+"/"+item.id+"' ><table class='table' width='100%'>"
     							+"<tr class='success' ><td rowspan='4' width='10%'><img class='img-rounded' width='100' src='{{asset('images/Proyecto.jpg')}}' alt='Smiley face' ></td></tr>"
     							+"<tr class='success' ><td><strong>Nombre: </strong>"+ item.name + "</td><td><strong>"+ item.status + "</strong></td></tr>"
     							+"<tr class='success' ><td colspan='2'><strong>Localidad: </strong>"+ item.locality + "</td></tr>"
@@ -150,6 +150,9 @@ $( "#tags1" ).autocomplete({
     select: function( event, ui ) {
         $("#invisible_id").val(ui.item.id);
         $("#respuesta2").html("");
+        var valor1="{{URL::to('/customer/crear')}}";
+        var valor2="_blank"
+        var valor3= "width=1000, height=700, top=50, left=50, scrollbars=1"
         var tag="<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>Cliente</h3></div>"
                 +"<div class='panel-body'>"
                 +"Nombre: "+ui.item.name+"<br>"
@@ -159,18 +162,22 @@ $( "#tags1" ).autocomplete({
                 +"Localidad: "+ui.item.locality+"<br>"
                 +"Telefono de Contacto: "+ui.item.phone_contact+"<br>"
                 +"Persona contacto: "+ui.item.person_contact+"<br>"
+                +"</div><div class='panel-footer'>"
+                +"<a href='#' class='btn btn-info btn-default' onclick='abreVentana("+ui.item.id+");'>Editar</a>"
                 +"</div></div>";
         $("#respuesta2").append(tag);
         $( "#tags1" ).val( ui.item.name);
         return false;  
         },
-        
+         
     }).autocomplete( "instance" )._renderItem = function( ul, item ) {
       return $( "<li>" )
         .append( "<a>" + item.name + "<br>" + "<span class='letrica'>"+ item.email +"</span>"+ "</a>" )
         .appendTo( ul ); };
 
 });
+
+
 
 function enviarAjax(valor) {
 
@@ -191,7 +198,7 @@ function enviarAjax(valor) {
                 if(data=="")
                   return $("#respuesta").html("<div class='alert alert-dismissable alert-danger'> <button type='button' class='close' data-dismiss='alert'>×</button> <h4>Error!</h4> <p> No se han encontrado registros. </p></div>");
                 ($.map(data, function(item) {
-                var registro="<div class='table-responsive'><a class='text-muted' href='#' ><table class='table' width='100%'>"
+                var registro="<div class='table-responsive'><a class='text-muted'href='{{URL::to('/project/individual')}}"+"/"+item.id+"' ><table class='table' width='100%'>"
                   +"<tr class='success' ><td rowspan='4' width='10%'><img class='img-rounded' width='100' src='{{asset('images/Proyecto.jpg')}}' alt='Smiley face' ></td></tr>"
                   +"<tr class='success' ><td><strong>Nombre: </strong>"+ item.name + "</td><td><strong>"+ item.status + "</strong></td></tr>"
                   +"<tr class='success' ><td colspan='2'><strong>Localidad: </strong>"+ item.locality + "</td></tr>"
@@ -199,10 +206,13 @@ function enviarAjax(valor) {
                   +"</table></div>";
                 return $("#respuesta").append(registro);
                       }));
-                    
                 }
              });
           }
+
+          function abreVentana(id){
+  window.open("{{URL::to('/customer/edtiCustomer/')}}"+"/"+id,"_blank","width=1000, height=700, top=50, left=50, scrollbars=1");
+}
 
 </script>
   @stop  
