@@ -261,6 +261,9 @@ class UserController extends BaseController
 		$perfil=$usuario->role()->first()->name;
 		$empleado=$usuario->employee()->first();
 		$nombre=$empleado->first_name;
+		$fecha= explode("-", $empleado->date_birth);
+		$empleado->date_birth=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+
 		return View::make('users.edit', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'2'));
 
 	
@@ -277,7 +280,7 @@ class UserController extends BaseController
 					'telefonoCel' =>'required',
 					'direccion' =>'required',
 					'estadoCivil' =>'required',
-					'nacimiento' =>'required|date_format:d/m/Y',
+					'nacimiento' =>'required', 
 					'sexo' =>'required',
 					'profesion' =>'required',
 					'especialidad' =>'required',
@@ -304,6 +307,7 @@ class UserController extends BaseController
 
 					try
 					{
+					$fecha= explode("-", Input::get('nacimiento'));
 					$affectedRows = Employee::where('user_id', '=', $usuario->id)->update(
 						array('first_name' => Input::get('nombre'),
 							'last_name' => Input::get('apellido'),
@@ -312,7 +316,7 @@ class UserController extends BaseController
 							'phone_cel' => Input::get('telefonoCel'),
 							'address' => Input::get('direccion'),
 							'civil_status' => Input::get('estadoCivil'),
-							'date_birth' => Input::get('nacimiento'),
+							'date_birth' => $fecha[2].'-'.$fecha[1].'-'.$fecha[0],
 							'sex' => Input::get('sexo'),
 							'profession' => Input::get('profesion'),
 							'specialty' => Input::get('especialidad'),

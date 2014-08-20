@@ -8,50 +8,6 @@ Perfil
   @stop  
 
 
-
-@section('style')
-@parent
-   <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
-  @stop
-
-@section('scripts')
- @parent
-  <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-  <script type="text/javascript">
-$(function() {
- $.datepicker.regional['es'] = {
- closeText: 'Cerrar',
- prevText: '<Ant',
- nextText: 'Sig>',
- currentText: 'Hoy',
- monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
- monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
- dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
- dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
- dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
- weekHeader: 'Sm',
- dateFormat: 'dd/mm/yy',
- firstDay: 1,
- isRTL: false,
- showMonthAfterYear: false,
- yearSuffix: ''
- };
- $.datepicker.setDefaults($.datepicker.regional['es']);
-
-
-    $( "#datepicker" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-
-    });
-  });
-
-  
-  </script>
-
-  @stop  
-
-
 @section('menuPrincipal')
 @include('Layouts.Menu.menuPrincipal')
   @stop  
@@ -107,7 +63,7 @@ $(function() {
 <fieldset class="form-group col-md-5">
 {{Form::label('email', 'Email: ')}}
 @if($errors->has('email'))
-    {{Form::email('email',$errors->first('email'),array('class'=>'label label-warning'))}}
+    {{Form::label('email',$errors->first('email'),array('class'=>'label label-warning'))}}
     @endif
 {{Form::email('email', $login, array('class'=>'form-control','disabled',"required"=>"true"))}}
 </fieldset>
@@ -161,7 +117,7 @@ $(function() {
 @if($errors->has('nacimiento'))
     {{Form::label('nacimiento',$errors->first('nacimiento'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('nacimiento', $empleado->date_birth, array('class'=>'form-control',"required"=>"true",'id'=>"datepicker"))}}
+{{ Form::input('date','nacimiento', $empleado->date_birth, array('class'=>'form-control',"required"=>"true",'id'=>"datepicker"))}}
 </fieldset>
 
 <fieldset class="form-group col-md-5">
