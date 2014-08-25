@@ -16,4 +16,49 @@ class ActivityController extends BaseController
 
 		return View::make('miConsultora.miConsultora_Activity', array('menu' => '1','nombre'=>$nombre->email,"project"=> $project,"count_project"=>$count_project,"activity"=>$activity));
 	}
+
+	public function createActivity()
+	{
+		$id=Input::get('invisible_id');
+		if($id=="" or $id=="null"){
+			return Redirect::to('/');
+		}
+		$rules=array(
+			'invisible_user_id'=>'required',
+			'invisible_id' => 'required', 
+			'description'=>'required',
+			'types_activitie_id' => 'required', 
+			'date_proposal'=>'required',
+		);	
+		$validator=Validator::make(Input::all(),$rules);
+		if(!$validator->fails())
+		{
+			try{
+				$now = date('Y-m-d H:i:s');
+				$fecha= explode("-", Input::get('date_proposal'));
+				$activity=new Activitie();
+				$activity->types_activitie_id=Input::get('types_activitie_id');
+				$activity->project_id=Input::get('invisible_id');
+				$activity->user_id=Input::get('invisible_user_id');
+				$activity->description=Input::get('description');
+				$activity->status="Asignada";
+				$activity->date_create=$now;
+				$activity->date_proposal=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+				$activity->save();
+				$usuarios = DB::table('project_user')->where('project_id', '=', $id)->where('user_id', '=', Input::get('invisible_user_id'))->first();
+				if($usuarios==null){
+				$relacion = array('project_id'=> Input::get('invisible_id'),
+					'user_id'=> Input::get('invisible_user_id'),
+					'date_create'=> $now);
+				DB::table('project_user')->insert($relacion);
+				} 
+				return Redirect::to('/project/individual/activity'.'/'.$id)->with('messageAct','Se Registró al usuario correctamente y se ha enviado un correo con los datos');
+			}catch (Exception $e) {return$e;
+				return Redirect::to('/project/individual/activity'.'/'.$id)->with('messageErrorAct','Se produjo un error')->withInput();
+			}
+		}else{
+			return Redirect::to('/project/individual/activity'.'/'.$id)->withErrors($validator)->withInput();
+		}
+	
+	}
 }

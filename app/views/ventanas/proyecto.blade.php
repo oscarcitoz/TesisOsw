@@ -203,7 +203,7 @@ function enviarAjax(valor) {
                   +"<tr class='success' ><td><strong>Nombre: </strong>"+ item.name + "</td><td><strong>"+ item.status + "</strong></td></tr>"
                   +"<tr class='success' ><td colspan='2'><strong>Localidad: </strong>"+ item.locality + "</td></tr>"
                   +"<tr class='success' ><td colspan='2'><strong>Lider: </strong>"+ item.first_name+ "</td></tr>"
-                  +"</table></div>";
+                  +"</table></a></div>";
                 return $("#respuesta").append(registro);
                       }));
                 }

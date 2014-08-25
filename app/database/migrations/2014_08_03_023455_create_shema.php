@@ -79,11 +79,11 @@ class CreateShema extends Migration {
 	        $table->string('description',255);
 	        $table->string('status',50);
 	        $table->double('amount_contract');
-	        $table->string('document_budget',255);
+	        $table->string('document_budget',255)->nullable();
 	        $table->string('name',255);
-	        $table->string('locality',15);
+	        $table->string('locality',255);
 	        $table->timestamp('date_create');
-	        $table->timestamp('date_end');
+	        $table->timestamp('date_end')->nullable();
     	});
 
     	Schema::create('activities', function($table){
@@ -101,7 +101,7 @@ class CreateShema extends Migration {
     	Schema::create('records', function($table){
 	        $table->increments('id');
 	        $table->integer('project_id')->unsigned();
-	        $table->integer('status');
+	        $table->string('status',50);
 	        $table->string('comment',255);
 	        $table->timestamp('date_create');
     	});

@@ -67,6 +67,7 @@ Route::post('/proyecto/buscar/tipo', 'ProjectController@buscarTipo');
 Route::post('/proyecto/buscar/status', 'ProjectController@buscarStatus');
 Route::post('/proyecto/create', 'ProjectController@create');
 Route::get('/project/registrar', 'ProjectController@proyectoReg');
+Route::get('/project/edit/{id}', 'ProjectController@proyectoEdit');
 
 //customer
 Route::get('/customer/buscar/customer', 'CustomerController@buscarCustomer');
@@ -77,6 +78,16 @@ Route::post('/customer/update','CustomerController@updateCustomer');
 
 //Proyectos Individuales
 Route::get('/project/individual/{id}','ProjectController@proyectoIndividual');
+Route::get('/project/individual/document/{id}','ProjectController@proyectoDocument');
+Route::get('/project/individual/document_varios/{id}','ProjectController@proyectoDocument_varios');
+Route::get('/project/individual/status/{id}','ProjectController@proyectoStatus');
+Route::get('/project/individual/activity/{id}','ProjectController@proyectoAct');
+Route::post('/project/individual/actualizaMonto','ProjectController@actualizaMonto');
+Route::post('/project/individual/actualizaDocument','ProjectController@actualizaDocument');
+Route::post('/project/individual/cambiarstatus','ProjectController@CambiarStatus');
+Route::post('/project/individual/agregaDocument','Document_projectController@agrega');
+Route::post('/project/individual/createActivity','ActivityController@createActivity');
+
 
 
 Route::controller('password', 'RemindersController');
