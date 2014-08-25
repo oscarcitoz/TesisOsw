@@ -43,7 +43,9 @@
 <div class="row">
 	<div class='col-md-6 col-md-offset-4'>
 <a href="#" onclick="reporte()" class="btn btn-info btn-default">Reporte</a>
+@if(Auth::user()->role->name=='admin')
 <a href="{{URL::to('/empresa/modificar')}}" class="btn btn-info btn-default">Modificar</a>
+@endif
 </div>
 </div>
 

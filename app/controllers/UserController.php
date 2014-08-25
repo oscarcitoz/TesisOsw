@@ -6,7 +6,7 @@ class UserController extends BaseController
 		public function __construct()
 	{
 		$this->beforeFilter('auth');		
-		//$this->beforeFilter('admin',array('only'=>array('create','destroy')));
+		$this->beforeFilter('admin',array('only'=>array('store','actualizaStatus')));
 		//$this->beforeFilter('adminGerente',array('only'=>array('admin_gerente')));
 				
 
@@ -34,17 +34,29 @@ class UserController extends BaseController
 				if ($pos === false) { 
 					
 				$nombre=$var;
+				if(Auth::user()->role->name=='admin'){
 				$empleados=Employee::where('first_name', 'LIKE', '%'.$nombre.'%')->get()->toJson();
-				
+				}
+				else 
+				{
+				$empleados=DB::table('employees')->join('users', 'employees.user_id', '=', 'users.id')->where('employees.first_name', 'LIKE', '%'.$nombre.'%')->where('users.status', '=', 1)->get();
+				}
 				}
 				else { 
 
 					$lista=explode(" ",$var);
-				
+				if(Auth::user()->role->name=='admin'){
 					$empleados=Employee::where(function ($query) use ($lista) {
 				    $query->where('first_name', 'LIKE', '%'.$lista[0].'%')
 				    	->where('last_name', 'LIKE', '%'.$lista[1].'%');})->get()->toJson();
-
+				}
+				else 
+				{
+					$empleados=DB::table('employees')->join('users', 'employees.user_id', '=', 'users.id')->where(function ($query) use ($lista) {
+				    $query->where('employees.first_name', 'LIKE', '%'.$lista[0].'%')
+				    	->where('employees.last_name', 'LIKE', '%'.$lista[1].'%')
+							->where('users.status', '=', 1);})->get();
+				}
 				}
 				
 				return $empleados;
@@ -58,7 +70,15 @@ class UserController extends BaseController
 			if((isset($_GET['term'])))
 			{
 				$cedu=$_GET['term'];
+				if(Auth::user()->role->name=='admin'){
 				$empleados=Employee::where('ident_card', 'LIKE', '%'.$cedu.'%')->get()->toJson();
+				}
+				else 
+				{
+				$empleados=DB::table('employees')->join('users', 'employees.user_id', '=', 'users.id')->where('employees.ident_card', 'LIKE', '%'.$cedu.'%')->where('users.status', '=', 1)->get();
+				}
+
+				
 				return $empleados;
 			}
 
@@ -105,7 +125,13 @@ class UserController extends BaseController
 					else return 0;
 				}
 						else {
-							$empleados=Employee::where('profession', '=', $parametro)->get();
+
+							if(Auth::user()->role->name=='admin'){
+								$empleados=Employee::where('profession', '=', $parametro)->get();
+							}
+							else{
+							$empleados=DB::table('employees')->join('users', 'employees.user_id', '=', 'users.id')->where('profession', '=', $parametro)->where('users.status', '=', 1)->get();
+							}
 							if ($empleados!==null){
 						foreach ($empleados as $empleado) {
 							$usi=User::where('id', '=', $empleado->user_id)->first();
@@ -129,7 +155,13 @@ class UserController extends BaseController
 	public function verUsuario($id)
 	{
 		try{
+		if(Auth::user()->role->name=='admin'){
 		$usuario=User::where('id', '=',  $id)->first();
+		}
+		else 
+		{
+		$usuario=User::where('id', '=',  $id)->where('status', '=',  1)->first();	
+		}
 		if($usuario!==null){
 		$empleado=$usuario->employee()->first();
 		$login=$usuario->email;

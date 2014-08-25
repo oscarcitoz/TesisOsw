@@ -135,9 +135,12 @@ Inactivo
 <div class="row">
 	<div class='col-md-6 col-md-offset-4'>
 <a href="#" onclick="reporte()" class="btn btn-info btn-default">Reporte</a>
+@if(Auth::user()->role->name=='admin')
 <a href="#" onclick="cambiarStatus()" class="btn btn-info btn-default">Cambiar Status</a>
-
+@endif
+@if(Auth::user()->role->name=='admin' || Auth::user()->role->name=='gerente')
 <a class="btn btn-info btn-default" href="{{asset($empleado->curriculum)}}" target="_blank">Ver Curriculum</a>
+@endif
 </div>
 </div>
 

@@ -94,7 +94,7 @@ Route::filter('admin',function($route){
 // Si no es admin lo redirecciono	
 	$rol=Auth::user()->role()->first()->name;
 	if($rol!='admin')
-	return Redirect::to('/main');
+	return Redirect::to('/');
 
 });
 
@@ -102,6 +102,6 @@ Route::filter('adminGerente',function($route){
 // Si es empleado lo redirecciono
 	$rol=Auth::user()->role()->first()->name;
 	if($rol=='empleado')
-	return Redirect::to('/main');
+	return Redirect::to('/');
 
 });

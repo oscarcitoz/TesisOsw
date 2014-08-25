@@ -36,13 +36,20 @@ class HomeController extends BaseController {
 		$rules=array('email'=>'required|email','password'=>'required|min:8');
 			$validator= Validator::make(Input::all(),$rules);
 			if(! $validator->fails()){
-
+				$usi=User::where('email', '=',Input::get('email'))->get()->first();
+				if($usi==!null){
+					if($usi->status==1){
 				if(Auth::attempt(array('email'=>Input::get('email'),'password'=>Input::get('password'))))
 				{
 					return Redirect::intended('/');
 
 				}
-
+				}
+				else 
+				{
+					return Redirect::to('/login')->with('message','Usuario Inactivo')->withInput();
+				}
+				}
 				else
 				{
 					//Redirect to login form with error message

@@ -5,8 +5,8 @@ class CustomerController extends BaseController {
 
 		public function __construct()
 	{
-		$this->beforeFilter('auth');		
-			
+		$this->beforeFilter('auth');	
+		$this->beforeFilter('admin',array('only'=>array('edit','update')));	
 	}
 
 	public function index()
