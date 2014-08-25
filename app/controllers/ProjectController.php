@@ -70,6 +70,7 @@ public function proyectoReg()
 			$lis_aux->name = $act->types_activitie()->first()->name;
 			$lis_aux->date_proposal = $act->date_proposal;
 			$lis_aux->status = $act->status;
+			$lis_aux->id = $act->id;
 			$lis_aux->description = $act->description;
 			array_push($array_list2, $lis_aux);
 		}
@@ -226,6 +227,7 @@ public function proyectoReg()
 			$lis_aux->name = $act->types_activitie()->first()->name;
 			$lis_aux->date_proposal = $act->date_proposal;
 			$lis_aux->status = $act->status;
+			$lis_aux->id = $act->id;
 			$lis_aux->description = $act->description;
 			array_push($array_list2, $lis_aux);
 		}
@@ -269,6 +271,7 @@ public function proyectoReg()
 			$lis_aux->name = $act->types_activitie()->first()->name;
 			$lis_aux->date_proposal = $act->date_proposal;
 			$lis_aux->status = $act->status;
+			$lis_aux->id = $act->id;
 			$lis_aux->description = $act->description;
 			array_push($array_list2, $lis_aux);
 		}
@@ -311,6 +314,7 @@ public function proyectoReg()
 			$lis_aux->name = $act->types_activitie()->first()->name;
 			$lis_aux->date_proposal = $act->date_proposal;
 			$lis_aux->status = $act->status;
+			$lis_aux->id = $act->id;
 			$lis_aux->description = $act->description;
 			array_push($array_list2, $lis_aux);
 		}
@@ -353,6 +357,7 @@ public function proyectoReg()
 			$lis_aux->name = $act->types_activitie()->first()->name;
 			$lis_aux->date_proposal = $act->date_proposal;
 			$lis_aux->status = $act->status;
+			$lis_aux->id = $act->id;
 			$lis_aux->description = $act->description;
 			array_push($array_list2, $lis_aux);
 		}
@@ -395,6 +400,7 @@ public function proyectoReg()
 			$lis_aux->name = $act->types_activitie()->first()->name;
 			$lis_aux->date_proposal = $act->date_proposal;
 			$lis_aux->status = $act->status;
+			$lis_aux->id = $act->id;
 			$lis_aux->description = $act->description;
 			array_push($array_list2, $lis_aux);
 		}
@@ -614,6 +620,7 @@ class Employee_project
 class Detalle_Activity
 {
     // Declaración de la propiedad
+    public $id;
     public $name;
     public $status;
     public $date_proposal;
@@ -623,6 +630,7 @@ class Detalle_Activity
     {
         return 'Detalle_Activity[name=' . $this->name .
             ', status=' . $this->status .
+            ', id=' . $this->id .
             ', date_proposal=' . $this->date_proposal .
             ', description=' . $this->description .']';
     }

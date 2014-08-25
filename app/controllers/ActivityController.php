@@ -7,6 +7,32 @@ class ActivityController extends BaseController
 		$this->beforeFilter('auth');
 	}
 
+	public function actividadIndividual($id){
+		$activity=Activitie::find($id);
+		$project=$activity->project()->first();
+		$name=$project->name;
+		$types_activitie=$activity->types_activitie()->first()->name;
+		$lider=$project->join('employees', 'projects.user_id', '=', 'employees.user_id')
+				->select('employees.first_name','employees.last_name')->first();
+		$usuario=Auth::user();
+		$nombre=$usuario->employee()->first()->first_name;
+		$document_project=$activity->Documents_activitie()->get();	
+		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'1','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project));
+	}
+
+	public function actividadIndividualDocument($id){
+		$activity=Activitie::find($id);
+		$project=$activity->project()->first();
+		$name=$project->name;
+		$types_activitie=$activity->types_activitie()->first()->name;
+		$lider=$project->join('employees', 'projects.user_id', '=', 'employees.user_id')
+				->select('employees.first_name','employees.last_name')->first();
+		$usuario=Auth::user();
+		$nombre=$usuario->employee()->first()->first_name;	
+		$document_project=$activity->Documents_activitie()->get();
+		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'2','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project));
+	}
+
 	public function consultora_activity()
 	{
 		$nombre=Auth::user();

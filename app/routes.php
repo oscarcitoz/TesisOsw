@@ -88,6 +88,9 @@ Route::post('/project/individual/cambiarstatus','ProjectController@CambiarStatus
 Route::post('/project/individual/agregaDocument','Document_projectController@agrega');
 Route::post('/project/individual/createActivity','ActivityController@createActivity');
 
-
+//actividad individual
+Route::get('/actividad/individual/{id}','ActivityController@actividadIndividual');
+Route::get('/actividad/individual/document_varios/{id}','ActivityController@actividadIndividualDocument');
+Route::post('/actividad/individual/agregaDocument','Documents_activitieController@agrega');
 
 Route::controller('password', 'RemindersController');
