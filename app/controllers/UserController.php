@@ -293,9 +293,12 @@ class UserController extends BaseController
 		$perfil=$usuario->role()->first()->name;
 		$empleado=$usuario->employee()->first();
 		$nombre=$empleado->first_name;
+	try{
 		$fecha= explode("-", $empleado->date_birth);
 		$empleado->date_birth=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
-
+	}catch(Exception $e) {
+		$empleado->date_birth='';
+	}	
 		return View::make('users.edit', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'2'));
 
 	
