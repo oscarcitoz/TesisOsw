@@ -38,42 +38,65 @@
 
 <div class=​"well bs-component">​
 	<div class="row">
-		<fieldset class="form-group col-md-5">
-		{{Form::label('amount_contract', 'Monto Total Contratado: ')}}
-		@if($errors->has('amount_contract'))
-		    {{Form::label('amount_contract',$errors->first('amount_contract'),array('class'=>'label label-warning'))}}
-		    @endif
-		{{Form::text('amount_contract',  $project->amount_contract, array('class'=>'form-control',"required"=>"true" , 'maxlength'=>'255'))}}
-		</fieldset>
-
-		<fieldset class="form-group col-md-5"><br>
-			<input type="button" class="btn btn-primary btn-lg" value="Modificar Presupuesto" onclick="cambiarPresupuesto()"/>  
-		</fieldset>
+		
+		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
+			<fieldset class="form-group col-md-5">
+			{{Form::label('amount_contract', 'Monto Total Contratado: ')}}
+			@if($errors->has('amount_contract'))
+			    {{Form::label('amount_contract',$errors->first('amount_contract'),array('class'=>'label label-warning'))}}
+			    @endif
+			{{Form::text('amount_contract',  $project->amount_contract, array('class'=>'form-control',"required"=>"true" , 'maxlength'=>'255'))}}
+				<p class="help-block">Para guardar el monto presione 'Modificar Presupuesto'</p>
+			</fieldset>
+			<fieldset class="form-group col-md-5"><br>
+				<input type="button" class="btn btn-primary btn-lg" value="Modificar Presupuesto" onclick="cambiarPresupuesto()"/>  
+			</fieldset>
+		@else
+			<fieldset class="form-group col-md-5">
+			{{Form::label('amount_contract', 'Monto Total Contratado: ')}}
+			@if($errors->has('amount_contract'))
+			    {{Form::label('amount_contract',$errors->first('amount_contract'),array('class'=>'label label-warning'))}}
+			    @endif
+			{{Form::text('amount_contract',  $project->amount_contract, array('class'=>'form-control',"required"=>"true" , 'maxlength'=>'255','disabled'))}}
+			</fieldset>
+		@endif
 	</div>
 
-{{Form::open(array('url'=>'/project/individual/actualizaDocument','files'=>true,'method'=>'post', 'id'=>'formulario_project'))}}
-{{ Form::hidden('invisible', $project->id, array('id' => 'invisible_id')) }}
 	<div class="row">
-		<fieldset class="form-group col-md-8">
-      {{Form::label('document_budget','Archivo:')}}
-    @if($errors->has('document_budget'))
-    {{Form::label('document_budget',$errors->first('document_budget'),array('class'=>'label label-warning'))}}
-    @endif
+		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
+			{{Form::open(array('url'=>'/project/individual/actualizaDocument','files'=>true,'method'=>'post', 'id'=>'formulario_project'))}}
+			{{ Form::hidden('invisible', $project->id, array('id' => 'invisible_id')) }}
+			<fieldset class="form-group col-md-8">
+	      	{{Form::label('document_budget','Archivo:')}}
+	    	@if($errors->has('document_budget'))
+	    		{{Form::label('document_budget',$errors->first('document_budget'),array('class'=>'label label-warning'))}}
+	    	@endif
+		    {{Form::File('document_budget', array('class'=>'form-control',"required"=>"true"))}}
+		    <p class="help-block">Debes subir exclusivamente archivos PDF</p>
+		  	</fieldset>
 
-    {{Form::File('document_budget', array('class'=>'form-control',"required"=>"true"))}}
-    <p class="help-block">Debes subir exclusivamente archivos PDF</p>
-  </fieldset>
+			<fieldset class="form-group col-md-8">
+				<input type="submit" class="btn btn-primary btn-lg" value="Subir Archivo del Presupuesto"/>  
+			</fieldset>
+			{{Form::close()}}
+		@endif
+		@if ($project->document_budget !== null)
+			<a class="btn btn-primary btn-lg" href="{{asset($project->document_budget)}}" download={{$nombre}}><img class="img-rounded" width="20" src="{{asset('images/descargar.png')}}" alt="Descargar Archivo">Descargar Archivo</a>
+		@else
+			<fieldset class="form-group col-md-8">
+				<table class="table" >
+					<tr class="danger">
+						<td><strong>No existe ningun presupuesto guardado</strong></td>
+					</tr>
+				</table>
+			</fieldset>
+		@endif
 
-		<fieldset class="form-group col-md-8">
-			<input type="submit" class="btn btn-primary btn-lg" value="Modificar Archivo del Presupuesto"/>  
-			@if ($project->document_budget !== null)
-				<a class="btn btn-primary btn-lg" href="{{asset($project->document_budget)}}" download={{$nombre}}><img class="img-rounded" width="20" src="{{asset('images/descargar.png')}}" alt="Descargar Archivo">Descargar Archivo</a>
-			@endif
-		</fieldset>
+
+
 
 	</div>
 
-{{Form::close()}}
 
 </div>
 

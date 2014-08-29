@@ -94,6 +94,7 @@ public function proyectoReg()
 		{
 			$name=$_GET['term'];
 			$project=Project::join('employees', 'projects.user_id', '=', 'employees.user_id')
+			->orderBy('date_create','desc')
 			->where('name', 'LIKE', '%'.$name.'%')
 			->get()->toJson();
 			return $project;
@@ -105,7 +106,10 @@ public function proyectoReg()
 		if((isset($_GET['term'])))
 		{
 			$locality=$_GET['term'];
-			$project=Project::where('locality', 'LIKE', '%'.$locality.'%')->get()->toJson();
+			$project=Project::join('employees', 'projects.user_id', '=', 'employees.user_id')
+			->where('locality', 'LIKE', '%'.$locality.'%')
+			->orderBy('date_create','desc')
+			->get()->toJson();
 			return $project;
 		}		
 	}
@@ -120,6 +124,7 @@ public function proyectoReg()
 			{
 				$parametro= Input::get('buscar');
 				$project=Project::join('employees', 'projects.user_id', '=', 'employees.user_id')
+				->orderBy('date_create','desc')
 				->where('types_project_id', $parametro)
 				->get()->toJson();
 			return $project;		
@@ -140,6 +145,7 @@ public function proyectoReg()
 			{
 				$parametro= Input::get('buscar');
 				$project=Project::join('employees', 'projects.user_id', '=', 'employees.user_id')
+				->orderBy('date_create','desc')
 				->where('status', $parametro)
 				->get()->toJson();
 			return $project;		
@@ -201,8 +207,8 @@ public function proyectoReg()
 		$status = array('Propuesta' => 'Propuesta', 
 			'Adjudicado' => 'Adjudicado', 
 			'Ejecución' => 'Ejecución', 
-			'Paralizado' => 'Paralizado', 
 			'Finalizado' => 'Finalizado', 
+			'Paralizado' => 'Paralizado', 
 			'Cerrado' => 'Cerrado', );
 		$usuario=Auth::user();
 		$document_project=$Project->Documents_project()->get();
@@ -245,8 +251,8 @@ public function proyectoReg()
 		$status = array('Propuesta' => 'Propuesta', 
 			'Adjudicado' => 'Adjudicado', 
 			'Ejecución' => 'Ejecución', 
-			'Paralizado' => 'Paralizado', 
 			'Finalizado' => 'Finalizado', 
+			'Paralizado' => 'Paralizado', 
 			'Cerrado' => 'Cerrado', );
 		$usuario=Auth::user();
 		$document_project=$Project->Documents_project()->get();
@@ -288,8 +294,8 @@ public function proyectoReg()
 		$status = array('Propuesta' => 'Propuesta', 
 			'Adjudicado' => 'Adjudicado', 
 			'Ejecución' => 'Ejecución', 
-			'Paralizado' => 'Paralizado', 
 			'Finalizado' => 'Finalizado', 
+			'Paralizado' => 'Paralizado', 
 			'Cerrado' => 'Cerrado', );
 		$usuario=Auth::user();
 		$document_project=$Project->Documents_project()->get();
@@ -331,8 +337,8 @@ public function proyectoReg()
 		$status = array('Propuesta' => 'Propuesta', 
 			'Adjudicado' => 'Adjudicado', 
 			'Ejecución' => 'Ejecución', 
-			'Paralizado' => 'Paralizado', 
 			'Finalizado' => 'Finalizado', 
+			'Paralizado' => 'Paralizado', 
 			'Cerrado' => 'Cerrado', );
 		$usuario=Auth::user();
 		$document_project=$Project->Documents_project()->get();
@@ -374,8 +380,8 @@ public function proyectoReg()
 		$status = array('Propuesta' => 'Propuesta', 
 			'Adjudicado' => 'Adjudicado', 
 			'Ejecución' => 'Ejecución', 
-			'Paralizado' => 'Paralizado', 
 			'Finalizado' => 'Finalizado', 
+			'Paralizado' => 'Paralizado', 
 			'Cerrado' => 'Cerrado', );
 		$usuario=Auth::user();
 		$document_project=$Project->Documents_project()->get();
@@ -417,8 +423,8 @@ public function proyectoReg()
 		$status = array('Propuesta' => 'Propuesta', 
 			'Adjudicado' => 'Adjudicado', 
 			'Ejecución' => 'Ejecución', 
-			'Paralizado' => 'Paralizado', 
 			'Finalizado' => 'Finalizado', 
+			'Paralizado' => 'Paralizado', 
 			'Cerrado' => 'Cerrado', );	
 		return View::make('ventanas.proyectoIndividual.editProject', array('project'=>$Project,'combox'=>$status));
 	}
@@ -458,7 +464,7 @@ public function proyectoReg()
 			$Project=Project::find($id);
 		}
 		$rules=array(
-			'document_budget'=>'required|mimes:xls,xlsx,pdf',
+			'document_budget'=>'required|mimes:xlsx,pdf',
 			'invisible' => 'required', 
 		);	
 		$validator=Validator::make(Input::all(),$rules);
@@ -469,7 +475,7 @@ public function proyectoReg()
 				$Project->subir(Input::file('document_budget'));
 				$Project->document_budget;
 				$Project->save();
-				return Redirect::to('/project/individual/document'.'/'.$id)->with('messageRegistrar','Se Registró al usuario correctamente y se ha enviado un correo con los datos');
+				return Redirect::to('/project/individual/document'.'/'.$id)->with('messageRegistrar','Se actualizo el documento del presupuesto correctamente');
 			}catch (Exception $e) {
 					return Redirect::to('/project/individual/document'.'/'.$id)->with('messageErrorRegis','Se produjo un error')->withInput();
 			}
@@ -535,7 +541,7 @@ public function proyectoReg()
 					$record->save();
 							
 					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se actualizo correctamente el estatus');
-				}else if(Input::get('status')=="Paralizado" and $Project->status!="Finalizado"){
+				}else if((Input::get('status')=="Paralizado" or Input::get('status')=="Cerrado") and $Project->status!="Finalizado"){
 					$Project->status=Input::get('status');
 					$Project->save();
 					
@@ -546,19 +552,7 @@ public function proyectoReg()
 					$record->project_id=$id;	
 					$record->save();
 
-					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','El proyecto a sido Paralizado');
-				}else if( $Project->status=="Finalizado"  and Input::get('status')=="Cerrado"){
-					$Project->status=Input::get('status');
-					$Project->save();
-					
-					$record= new Record();
-					$record->status=Input::get('status');
-					$record->comment=Input::get('comment');
-					$record->date_create=$now;
-					$record->project_id=$id;	
-					$record->save();
-
-					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','El proyecto a sido Paralizado');
+					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','El proyecto a sido Detenido');
 				}else{
 					if( $Project->status=="Paralizado"){
 						return Redirect::to('/project/individual/status'.'/'.$id)->with('messageErrorStatus','No se actualizo el estatus debido a que se debe reactivar el proyecto regresando a su fase anterior '.$ultRecord->status);

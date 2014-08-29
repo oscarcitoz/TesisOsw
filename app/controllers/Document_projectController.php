@@ -25,7 +25,7 @@ class Document_projectController extends BaseController
 				$doc->subir(Input::file('attached'));
 				$doc->attached;
 				$doc->save();
-				return Redirect::to('/project/individual/document_varios'.'/'.$id)->with('messageDocument','Se Registró al usuario correctamente y se ha enviado un correo con los datos');
+				return Redirect::to('/project/individual/document_varios'.'/'.$id)->with('messageDocument','Se Registró el documento y ya esta disponible para su descarga');
 			}catch (Exception $e) {
 					return $e;Redirect::to('/project/individual/document_varios'.'/'.$id)->with('messageErrorDocument','Se produjo un error')->withInput();
 			}

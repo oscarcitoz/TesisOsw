@@ -25,6 +25,44 @@ Proyecto
 			    }
 			});
 		});
+
+      function cambiarPresupuesto(){
+     urlA= "{{URL::to('/actividad/individual/cambiarstatus')}}";
+     var id={{$activity->id}};
+     var status="Ejecutar";
+    $.ajax({
+      type: "POST",
+      url: urlA,
+      data: { id: id, status:status }
+    })
+      .done(function( msg ) {
+        if(msg.indexOf('ERROR')==-1)
+    { var noti="<div class='alert alert-dismissable alert-info'>"
+      +"<button type='button' class='close' data-dismiss='alert'>×</button>"
+      +"<strong>Presupuesto Actualizado! </strong>"
+      +"Modificación Realizada con Exito"
+      +"</div>";
+      $("#respuesta2").html(noti);
+      $("#status").hide("slow");
+    }
+    else{
+      var noti="<div class='alert alert-dismissable alert-danger'>"
+      +"<button type='button' class='close' data-dismiss='alert'>×</button>"
+      +"<strong>Oh Error! =(</strong><br>"
+      +msg
+      +"</div>";
+      $("#respuesta2").html(noti);}
+
+      }) .fail(function() {
+        var noti="<div class='alert alert-dismissable alert-danger'>"
+      +"<button type='button' class='close' data-dismiss='alert'>×</button>"
+      +"<strong>Registro Completo!</strong>"
+      +"Ha ocurrido un error Inesperado, intente nuevamente"
+      +"</div>";
+      $("#respuesta2").html(noti); 
+  });
+}
+
      </script>
   @stop  
 

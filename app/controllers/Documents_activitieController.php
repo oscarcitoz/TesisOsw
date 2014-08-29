@@ -25,7 +25,7 @@ class Documents_activitieController extends BaseController
 				$doc->subir(Input::file('attached'));
 				$doc->attached;
 				$doc->save();
-				return Redirect::to('/actividad/individual/document_varios'.'/'.$id)->with('messageDocument','Se Registró el documento correctamente');
+				return Redirect::to('/actividad/individual/document_varios'.'/'.$id)->with('messageDocument','Se Registró el documento y ya esta disponible para su descarga');
 			}catch (Exception $e) {
 					return $e;Redirect::to('/actividad/individual/document_varios'.'/'.$id)->with('messageErrorDocument','Se produjo un error')->withInput();
 			}

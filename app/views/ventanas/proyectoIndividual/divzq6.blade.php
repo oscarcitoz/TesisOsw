@@ -37,6 +37,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
 <div class=​"well bs-component">​
 	{{Form::open(array('url'=>'/project/individual/createActivity','method'=>'post', 'id'=>'formulario_Act'))}}
 	{{ Form::hidden('invisible_user_id', '', array('id' => 'invisible_user_id')) }}
@@ -86,6 +87,18 @@
 	</div>
 	{{Form::close()}}
 </div>
+@else
+	<fieldset class="form-group col-md-8">
+		<table class="table" >
+			<tr class="danger">
+				<td><strong>En este momento no es posible crear crear una nueva actividad</strong></td>
+			</tr>
+		</table>
+	</fieldset>
+@endif
+
+
+
 
 
 </div>

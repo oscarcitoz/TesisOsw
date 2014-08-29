@@ -5,7 +5,8 @@
 </ul>
 
 <div class=​"well bs-component">​
-	<div class="row">
+	@if($employees!=null)
+	<div class="row col-md-12">
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -17,7 +18,7 @@
 			</tr>
 		</thead>
 		<tbody>
-@foreach ($employees as $emplo)
+	@foreach ($employees as $emplo)
 	<tr>
 		<td>{{$emplo->first_name}} {{$emplo->last_name}}</td>
 		<td>{{$emplo->ident_card}}</td>
@@ -25,10 +26,19 @@
 		<td>{{$emplo->specialty}}</td>
 		<td>{{$emplo->status}}</td>
 	</tr>
-@endforeach
+	@endforeach
 	</tbody>
 	</table>
 	</div>
+	@else
+	<fieldset class="form-group col-md-8">
+		<table class="table" >
+			<tr class="danger">
+				<td><strong>No existe ningun Empleado asociado al Proyecto</strong></td>
+			</tr>
+		</table>
+	</fieldset>
+	@endif
 </div>
 
 

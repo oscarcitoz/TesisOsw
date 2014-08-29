@@ -17,7 +17,7 @@ class ActivityController extends BaseController
 		$usuario=Auth::user();
 		$nombre=$usuario->employee()->first()->first_name;
 		$document_project=$activity->Documents_activitie()->get();	
-		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'1','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project));
+		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'1','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project,'project'=>$project));
 	}
 
 	public function actividadIndividualDocument($id){
@@ -30,7 +30,7 @@ class ActivityController extends BaseController
 		$usuario=Auth::user();
 		$nombre=$usuario->employee()->first()->first_name;	
 		$document_project=$activity->Documents_activitie()->get();
-		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'2','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project));
+		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'2','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project,'project'=>$project));
 	}
 
 	public function consultora_activity()
@@ -78,7 +78,7 @@ class ActivityController extends BaseController
 					'date_create'=> $now);
 				DB::table('project_user')->insert($relacion);
 				} 
-				return Redirect::to('/project/individual/activity'.'/'.$id)->with('messageAct','Se Registró al usuario correctamente y se ha enviado un correo con los datos');
+				return Redirect::to('/project/individual/activity'.'/'.$id)->with('messageAct','Se creo la actividad de manera correcta');
 			}catch (Exception $e) {return$e;
 				return Redirect::to('/project/individual/activity'.'/'.$id)->with('messageErrorAct','Se produjo un error')->withInput();
 			}
@@ -87,4 +87,34 @@ class ActivityController extends BaseController
 		}
 	
 	}
+
+	public function CambiarStatus(){
+		if(Request::ajax()){
+			$rules=array(
+				'id' => 'required', 
+				'status' => 'required',
+			);	
+			$validator=Validator::make(Input::all(),$rules);
+			if(!$validator->fails())
+			{
+				$id= Input::get('id');
+		 		$status= Input::get('status');
+				try{
+					$activitie=Activitie::where('id', '=',  $id)->first();
+					$count=$activitie->Documents_activitie()->count();
+					if($count>=1){
+						$activitie->status=$status;
+						$activitie->save();
+					}else{
+						return "ERROR! Por favor suba los debidos documentos antes de pasar esta actvidad a la siguiente fase";
+					}
+				}catch (Exception $e) {
+						return "ERROR! Ha ocurrido un error Inesperado, intente nuevamente";
+				}
+			}else{
+				return "ERROR! Ha ocurrido un error Inesperado, intente nuevamente";
+			}
+		}
+	}
+
 }

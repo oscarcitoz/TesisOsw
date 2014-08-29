@@ -39,11 +39,7 @@ Proyecto
 
  var ventana=null;
  function abreVentana(id,ruta){
- 	var URL="";
- 	if(ruta=="project")
- 		URL="{{URL::to('/project/edit')}}";
- 	else
-	URL="{{URL::to('/customer/edtiCustomer')}}";
+ 	var URL="{{URL::to('/customer/edtiCustomer')}}";
   ventana  =  window.open(URL+"/"+id,"Modificacion","width=1000, height=700, top=50, left=50, scrollbars=yes");
   ventana.focus();
   }
@@ -61,7 +57,7 @@ Proyecto
         if(msg.indexOf('ERROR')==-1)
     { var noti="<div class='alert alert-dismissable alert-info'>"
       +"<button type='button' class='close' data-dismiss='alert'>×</button>"
-      +"<strong>Registro Completo!</strong>"
+      +"<strong>Presupuesto Actualizado! </strong>"
       +"Modificación Realizada con Exito"
       +"</div>";
       $("#respuesta2").html(noti);}

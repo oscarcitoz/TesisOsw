@@ -76,13 +76,7 @@
 	</div>
 </div>
 
-<div class=​"well bs-component">​
-	<div class="row">
-		<fieldset class="form-group col-md-5 col-md-offset-4">
-		<a href='#' class='btn btn-info btn-default' onclick='abreVentana({{$project->id}},"project");'>Editar</a>
-	</fieldset>
-	</div>
-</div>
+
 
 <br>
 

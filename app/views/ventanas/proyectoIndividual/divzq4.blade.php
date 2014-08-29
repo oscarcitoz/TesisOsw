@@ -22,6 +22,7 @@
 @endif
 
 <div class=​"well bs-component">​
+	@if ($project->status != "Cerrado" and $project->status != "Finalizado")
 	{{Form::open(array('url'=>'/project/individual/cambiarstatus','method'=>'post', 'id'=>'formulario_Status'))}}
 	{{ Form::hidden('invisible', $project->id, array('id' => 'invisible_id')) }}
 	<div class="row">
@@ -48,6 +49,16 @@
 		</fieldset>
 	</div>
 	{{Form::close()}}
+	@else
+		<fieldset class="form-group col-md-5">
+		{{Form::label('status', 'Estatus: ')}}
+		@if($errors->has('status'))
+		    {{Form::label('status',$errors->first('status'),array('class'=>'label label-warning'))}}
+		    @endif
+		{{Form::select('status',$combox,$project->status, array('class'=>'form-control',"required"=>"true", 'maxlength'=>'255','disabled'))}}
+		</fieldset>
+	@endif
+
 </div>
 
 </div>

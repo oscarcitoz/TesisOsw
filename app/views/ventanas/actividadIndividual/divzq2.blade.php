@@ -23,15 +23,18 @@
 </div>
 @endif
 
-<div class=​"well bs-component">​
-	<div class="row">
-		<fieldset class="col-md-9 col-md-offset-9">
-    		<input type="button" id="agrega" class="btn btn-primary btn-lg" value="Agregar"/>  
-		</fieldset>
-    </div>
-</div>
+	@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $activity->status!="Ejecutar")
+	<div class=​"well bs-component">​
+		<div class="row">
+			<fieldset class="col-md-9 col-md-offset-9">
+	    		<input type="button" id="agrega" class="btn btn-primary btn-lg" value="Agregar"/>  
+			</fieldset>
+	    </div>
+	</div>
+	@endif
 
 	<div class=​"well bs-component" id="cargar">
+		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $activity->status!="Ejecutar")
 		{{Form::open(array('url'=>'/actividad/individual/agregaDocument','files'=>true,'method'=>'post', 'id'=>'formulario_Document'))}}
 		{{ Form::hidden('invisible', $activity->id, array('id' => 'invisible_id')) }}
 			<div class="row">
@@ -57,6 +60,7 @@
 
 			</div>
 		{{Form::close()}}
+		@endif
 	</div>
 			@if ($document_project->count() > 0)
 			<div class='col-md-9'>
@@ -77,6 +81,14 @@
 				</tbody>
 				</table>
 			</div>
+			@else
+			<fieldset class="form-group col-md-8">
+				<table class="table" >
+					<tr class="danger">
+						<td><strong>No existe ningun documento guardado</strong></td>
+					</tr>
+				</table>
+			</fieldset>
 			@endif
 
 </div>
