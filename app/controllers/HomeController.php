@@ -44,18 +44,19 @@ class HomeController extends BaseController {
 					return Redirect::intended('/');
 
 				}
-				}
-				else 
-				{
-					return Redirect::to('/login')->with('message','Usuario Inactivo')->withInput();
-				}
-				}
 				else
 				{
 					//Redirect to login form with error message
 					return Redirect::to('/login')->with('message','Olvido su clave?')->withInput();
 
 				}
+				}
+				else 
+				{
+					return Redirect::to('/login')->with('message','Usuario Inactivo')->withInput();
+				}
+				}
+				
 
 			}
 
