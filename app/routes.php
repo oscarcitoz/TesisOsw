@@ -54,10 +54,10 @@ Route::get('/empresa/registrar', 'CustomerController@indexRegistrar');
 
 
 //Mi Consultora
-Route::get('/',array('uses'=>'ProjectController@consultora','before'=>'auth'));
-Route::get('/consultora',array('uses'=>'ProjectController@consultora','before'=>'auth'));
-Route::get('/consultora/more_project',array('uses'=>'ProjectController@consultora_project','before'=>'auth'));
-Route::get('/consultora/more_activity',array('uses'=>'ActivityController@consultora_activity','before'=>'auth'));
+Route::get('/','ProjectController@consultora');
+Route::get('/consultora','ProjectController@consultora');
+Route::get('/consultora/more_project','ProjectController@consultora_project');
+Route::get('/consultora/more_activity','ActivityController@consultora_activity');
 
 //proyecto
 Route::get('/proyecto', 'ProjectController@proyecto');

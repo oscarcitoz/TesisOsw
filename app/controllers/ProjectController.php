@@ -56,6 +56,7 @@ public function proyectoReg()
 		foreach ($project as $pro) {
 			$lis_aux = new Detalle_project();
 			$lis_aux->name = $pro->name;
+			$lis_aux->id = $pro->id;
 			$lis_aux->status = $pro->status;
 			$lis_aux->locality = $pro->locality;
 			$lis_aux->first_name =$pro->user()->first()->employee()->first()->first_name;
@@ -226,7 +227,11 @@ public function proyectoReg()
 			$lis_aux->status = $emplo->first()->status;
 			array_push($array_list, $lis_aux);
 		}
-		$activity = $Project->activitie()->get();
+		if(Auth::user()->role->name=='empleado'){
+			$activity = $Project->activitie()->where('user_id',$usuario->id)->get();
+		}else{
+			$activity = $Project->activitie()->get();
+		}
 		$array_list2 = array();
 		foreach ($activity as $act) {
 			$lis_aux = new Detalle_Activity();
@@ -270,7 +275,11 @@ public function proyectoReg()
 			$lis_aux->status = $emplo->first()->status;
 			array_push($array_list, $lis_aux);
 		}
-		$activity = $Project->activitie()->get();
+		if(Auth::user()->role->name=='empleado'){
+			$activity = $Project->activitie()->where('user_id',$usuario->id)->get();
+		}else{
+			$activity = $Project->activitie()->get();
+		}
 		$array_list2 = array();
 		foreach ($activity as $act) {
 			$lis_aux = new Detalle_Activity();
@@ -313,7 +322,11 @@ public function proyectoReg()
 			$lis_aux->status = $emplo->first()->status;
 			array_push($array_list, $lis_aux);
 		}
-		$activity = $Project->activitie()->get();
+		if(Auth::user()->role->name=='empleado'){
+			$activity = $Project->activitie()->where('user_id',$usuario->id)->get();
+		}else{
+			$activity = $Project->activitie()->get();
+		}
 		$array_list2 = array();
 		foreach ($activity as $act) {
 			$lis_aux = new Detalle_Activity();
@@ -356,7 +369,11 @@ public function proyectoReg()
 			$lis_aux->status = $emplo->first()->status;
 			array_push($array_list, $lis_aux);
 		}
-		$activity = $Project->activitie()->get();
+		if(Auth::user()->role->name=='empleado'){
+			$activity = $Project->activitie()->where('user_id',$usuario->id)->get();
+		}else{
+			$activity = $Project->activitie()->get();
+		}
 		$array_list2 = array();
 		foreach ($activity as $act) {
 			$lis_aux = new Detalle_Activity();
@@ -399,7 +416,11 @@ public function proyectoReg()
 			$lis_aux->status = $emplo->first()->status;
 			array_push($array_list, $lis_aux);
 		}
-		$activity = $Project->activitie()->get();
+		if(Auth::user()->role->name=='empleado'){
+			$activity = $Project->activitie()->where('user_id',$usuario->id)->get();
+		}else{
+			$activity = $Project->activitie()->get();
+		}
 		$array_list2 = array();
 		foreach ($activity as $act) {
 			$lis_aux = new Detalle_Activity();
@@ -576,6 +597,7 @@ public function proyectoReg()
 class Detalle_project
 {
     // Declaración de la propiedad
+    public $id;
     public $name;
     public $status;
     public $locality;
@@ -585,6 +607,7 @@ class Detalle_project
     {
         return 'Detalle_project[name=' . $this->name .
             ', status=' . $this->status .
+            ', id=' . $this->id .
             ', locality=' . $this->locality .
             ', first_name=' . $this->first_name . ']';
     }

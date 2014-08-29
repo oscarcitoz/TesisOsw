@@ -26,10 +26,12 @@ Proyecto
 			});
 		});
 
-      function cambiarPresupuesto(){
+    function cambiarstatus(status){
+       if (confirm("¿Dese cambiar el estatus de la actividad?") == false) {
+      return false;}
      urlA= "{{URL::to('/actividad/individual/cambiarstatus')}}";
      var id={{$activity->id}};
-     var status="Ejecutar";
+     //var status="Ejecutar";
     $.ajax({
       type: "POST",
       url: urlA,
@@ -43,6 +45,7 @@ Proyecto
       +"Modificación Realizada con Exito"
       +"</div>";
       $("#respuesta2").html(noti);
+      $("#fecha_fin").html(msg);
       $("#status").hide("slow");
     }
     else{

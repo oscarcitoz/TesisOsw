@@ -9,12 +9,15 @@ class ActivityController extends BaseController
 
 	public function actividadIndividual($id){
 		$activity=Activitie::find($id);
+		$usuario=Auth::user();
+		if($activity->user_id!=$usuario->id and $usuario->role->name=='empleado'){
+			return Redirect::to('/');
+		}
 		$project=$activity->project()->first();
 		$name=$project->name;
 		$types_activitie=$activity->types_activitie()->first()->name;
 		$lider=$project->join('employees', 'projects.user_id', '=', 'employees.user_id')
-				->select('employees.first_name','employees.last_name')->first();
-		$usuario=Auth::user();
+				->select('employees.first_name','employees.last_name','employees.user_id')->first();
 		$nombre=$usuario->employee()->first()->first_name;
 		$document_project=$activity->Documents_activitie()->get();	
 		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'1','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project,'project'=>$project));
@@ -22,12 +25,15 @@ class ActivityController extends BaseController
 
 	public function actividadIndividualDocument($id){
 		$activity=Activitie::find($id);
+		$usuario=Auth::user();
+		if($activity->user_id!=$usuario->id and $usuario->role->name=='empleado'){
+			return Redirect::to('/');
+		}
 		$project=$activity->project()->first();
 		$name=$project->name;
 		$types_activitie=$activity->types_activitie()->first()->name;
 		$lider=$project->join('employees', 'projects.user_id', '=', 'employees.user_id')
-				->select('employees.first_name','employees.last_name')->first();
-		$usuario=Auth::user();
+				->select('employees.first_name','employees.last_name','employees.user_id')->first();
 		$nombre=$usuario->employee()->first()->first_name;	
 		$document_project=$activity->Documents_activitie()->get();
 		return View::make('ventanas.actividadIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'2','activity'=>$activity,'name'=>$name,'types_activitie'=>$types_activitie,'lider'=>$lider,'document_project'=>$document_project,'project'=>$project));
@@ -38,7 +44,7 @@ class ActivityController extends BaseController
 		$nombre=Auth::user();
 		$count_project = $nombre->proyect()->count();	
 		$project = $nombre->proyect()->orderBy('date_create','desc')->take(5)->get();		
-		$activity = $nombre->activitie()->orderBy('date_create','desc')->paginate(1);
+		$activity = $nombre->activitie()->orderBy('date_create','desc')->paginate(3);
 
 		return View::make('miConsultora.miConsultora_Activity', array('menu' => '1','nombre'=>$nombre->email,"project"=> $project,"count_project"=>$count_project,"activity"=>$activity));
 	}
@@ -79,7 +85,7 @@ class ActivityController extends BaseController
 				DB::table('project_user')->insert($relacion);
 				} 
 				return Redirect::to('/project/individual/activity'.'/'.$id)->with('messageAct','Se creo la actividad de manera correcta');
-			}catch (Exception $e) {return$e;
+			}catch (Exception $e) {
 				return Redirect::to('/project/individual/activity'.'/'.$id)->with('messageErrorAct','Se produjo un error')->withInput();
 			}
 		}else{
@@ -103,8 +109,16 @@ class ActivityController extends BaseController
 					$activitie=Activitie::where('id', '=',  $id)->first();
 					$count=$activitie->Documents_activitie()->count();
 					if($count>=1){
-						$activitie->status=$status;
-						$activitie->save();
+						if($status=="Ejecutar"){
+							$activitie->status=$status;
+							$activitie->save();
+						}else{
+							$now = date('Y-m-d H:i:s');
+							$activitie->status=$status;
+							$activitie->date_end=$now;
+							$activitie->save();
+							return$now;
+						}
 					}else{
 						return "ERROR! Por favor suba los debidos documentos antes de pasar esta actvidad a la siguiente fase";
 					}

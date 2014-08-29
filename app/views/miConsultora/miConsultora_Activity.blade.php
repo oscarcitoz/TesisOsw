@@ -40,7 +40,7 @@ $(document).ready(function() {
 @if ($count_project>0)
 	@foreach ($project as $pro)
 		<div class="table-responsive text-muted">
-			<a class="text-muted" href="#" >
+			<a class="text-muted" href="/project/individual/{{$pro->id}}" >
 			<table class="table" >
 				<tr class="success" >
 					<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/Proyecto.jpg')}}" alt="Smiley face" ></td>
@@ -84,7 +84,7 @@ $(document).ready(function() {
 
 	@foreach ($activity as $act)
 		<div class="table-responsive">
-			<a class="text-muted" href="#">
+			<a class="text-muted" href="/actividad/individual/{{$act->id}}">
 				<table class="table" >
 					<tr class="success" >
 						<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/activi.jpg')}}" alt="Smiley face" ></td>

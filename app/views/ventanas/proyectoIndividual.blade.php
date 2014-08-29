@@ -80,6 +80,13 @@ Proyecto
 }
 
 $(function() {
+
+$( "#formulario_Status" ).submit(function( event ) {
+    if (confirm("¿Dese cambiar el estatus del proyecto?") == false) {
+      return false;}
+    //event.preventDefault();
+});
+
   $("#cargar").hide();
 
 $( "#agrega" ).click(function() {
@@ -176,11 +183,17 @@ $( "#tags" ).keydown(function(tecla){
 @section('contenido')
 
 @include('ventanas.proyectoIndividual.divzq1')
+@if(Auth::user()->role->name=='admin' or Auth::user()->role->name=='gerente')
 @include('ventanas.proyectoIndividual.divzq2')
+@endif
 @include('ventanas.proyectoIndividual.divzq3')
+@if(Auth::user()->role->name=='admin' or Auth::user()->role->name=='gerente')
 @include('ventanas.proyectoIndividual.divzq4')
+@endif
 @include('ventanas.proyectoIndividual.divzq5')
+@if(Auth::user()->role->name=='admin' or Auth::user()->role->name=='gerente')
 @include('ventanas.proyectoIndividual.divzq6')
+@endif
 @include('ventanas.proyectoIndividual.divzq7')
 @include('ventanas.proyectoIndividual.divzq8')
 

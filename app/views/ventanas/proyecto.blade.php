@@ -52,6 +52,8 @@ $( "#formulario_project" ).submit(function( event ) {
   if($("#invisible_id").val()==""){
       $('#myModal').modal('show');
     return false;}
+    if (confirm("¿Dese crear el nuevo proyecto?") == false) {
+      return false;}
     //event.preventDefault();
 });
 
@@ -236,7 +238,9 @@ Proyecto
 
 
 @include('ventanas.proyecto.divzq1')
+@if(Auth::user()->role->name=='admin' or Auth::user()->role->name=='gerente')
 @include('ventanas.proyecto.divzq2')
+@endif
 
 
 
