@@ -56,6 +56,10 @@ class HomeController extends BaseController {
 					return Redirect::to('/login')->with('message','Usuario Inactivo')->withInput();
 				}
 				}
+				else 
+				{
+					return Redirect::to('/login')->with('message','Correo no Existe')->withInput();
+				}
 				
 
 			}
