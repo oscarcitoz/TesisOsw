@@ -83,6 +83,11 @@ $(function() {
 
 $( "input[name=doc]:radio" ).change(function() {
   $("#invisible_id2").val(this.value);
+  if(this.value==0){
+    $("#agrega").val("Agregar");
+  }else{
+    $("#agrega").val("Modficar");
+  }
 });
 
 $( "#formulario_Status" ).submit(function( event ) {
@@ -106,6 +111,7 @@ $( "#agrega" ).click(function() {
 $( "#tags" ).keydown(function(tecla){
     if (tecla.keyCode == 8){
        $("#invisible_user_id").val("");
+       $("#respuesta3").html("");
     }
 });
 
@@ -123,7 +129,7 @@ $( "#tags" ).keydown(function(tecla){
       minLength: 0,
        source:function( request, response ) {
         urlA= "{{URL::to('/empresa/buscar/nombre')}}";
-       
+       $("#respuesta3").html("");
          $.ajax({
                     url: urlA,
                     dataType: "json",

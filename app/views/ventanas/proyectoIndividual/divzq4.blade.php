@@ -22,7 +22,7 @@
 @endif
 
 <div class=​"well bs-component">​
-	@if ($project->status != "Cerrado" and $project->status != "Finalizado")
+	@if ($project->status != "Cerrado" and $project->status != "Finalizado" and $project->user_id==Auth::user()->id)
 	{{Form::open(array('url'=>'/project/individual/cambiarstatus','method'=>'post', 'id'=>'formulario_Status'))}}
 	{{ Form::hidden('invisible', $project->id, array('id' => 'invisible_id')) }}
 	<div class="row">

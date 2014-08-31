@@ -37,7 +37,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
+@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $project->user_id==Auth::user()->id)
 <div class=​"well bs-component">​
 	{{Form::open(array('url'=>'/project/individual/createActivity','method'=>'post', 'id'=>'formulario_Act'))}}
 	{{ Form::hidden('invisible_user_id', '', array('id' => 'invisible_user_id')) }}

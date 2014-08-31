@@ -247,13 +247,13 @@ class UserController extends BaseController
 
 			catch (Exception $e) {
 
-				return Redirect::to('/empresa/registrar')->with('messageErrorRegis','Se produjo un error')->withInput();
+				return Redirect::to('/empresa/registrar')->with('messageErrorRegis','Se produjo un error y verifique sus datos')->withInput();
 
 			}
 			//try
 		//	{
 				$data = array(
-				'img' => 'logo/LOGO.png',
+				'img' => 'images/LOGO.png',
 			    'customer' => Input::get('first_name').' '.Input::get('last_name'),
 			    'pass' => $pass
 				);
@@ -357,6 +357,9 @@ class UserController extends BaseController
 							'specialty' => Input::get('especialidad'),
 							'curriculum' => $empleado->curriculum,
 							'photo' => $empleado->photo,));
+					$usuario->flag=1;
+					$usuario->save();
+				
 					
 						return Redirect::to('/perfil/datosPersonales')->with('messagePersonal','Se modificaron los datos correctamente');
 

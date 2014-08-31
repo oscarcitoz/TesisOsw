@@ -23,7 +23,7 @@
 </div>
 @endif
 
-	@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
+	@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $project->user_id==Auth::user()->id)
 		<div class=​"well bs-component">​
 			<div class="row">
 				<fieldset class="col-md-9 col-md-offset-9">
@@ -36,7 +36,7 @@
 		</div>
 	@endif
 	<div class=​"well bs-component" id="cargar">
-		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
+		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $project->user_id==Auth::user()->id)
 		{{Form::open(array('url'=>'/project/individual/agregaDocument','files'=>true,'method'=>'post', 'id'=>'formulario_Document'))}}
 		{{ Form::hidden('invisible', $project->id, array('id' => 'invisible_id')) }}
 		{{ Form::hidden('modificar', '0', array('id' => 'invisible_id2')) }}

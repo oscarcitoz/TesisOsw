@@ -39,7 +39,7 @@
 <div class=​"well bs-component">​
 	<div class="row">
 		
-		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
+		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $project->user_id==Auth::user()->id)
 			<fieldset class="form-group col-md-5">
 			{{Form::label('amount_contract', 'Monto Total Contratado: ')}}
 			@if($errors->has('amount_contract'))
@@ -63,7 +63,7 @@
 	</div>
 
 	<div class="row">
-		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado")
+		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $project->user_id==Auth::user()->id)
 			{{Form::open(array('url'=>'/project/individual/actualizaDocument','files'=>true,'method'=>'post', 'id'=>'formulario_project'))}}
 			{{ Form::hidden('invisible', $project->id, array('id' => 'invisible_id')) }}
 			<fieldset class="form-group col-md-8">

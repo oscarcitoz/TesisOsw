@@ -11,7 +11,7 @@ Mi Consultora
  @parent
 <script type="text/javascript">
 $(function() {
-	@if(Auth::user()->flag==1)
+	@if(Auth::user()->flag==0)
 		$('#myModal').modal('show');
 	@endif
 });
@@ -62,8 +62,8 @@ $(function() {
 
 @if ($count_project>0)
 	@foreach ($project as $pro)
-		<div class="table-responsive">
-			<a class="text-muted" href="/project/individual/{{$pro->id}}" >
+		<div class="table-responsive"> 
+			<a class="text-muted" href="{{URL::to('/project/individual')}}/{{$pro->id}}">
 			<table class="table" >
 				<tr class="success" >
 					<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/Proyecto.jpg')}}" alt="Proyecto" ></td>
@@ -109,7 +109,7 @@ $(function() {
 @if ($count_activity>0)
 	@foreach ($activity as $act)
 		<div class="table-responsive">
-			<a class="text-muted" href="/actividad/individual/{{$act->id}}">
+			<a class="text-muted" href="{{URL::to('/actividad/individual/')}}/{{$act->id}}">
 				<table class="table" >
 					<tr class="success" >
 						<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/activi.jpg')}}" alt="Smiley face" ></td>

@@ -65,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
-			'password' => '',
+			'host'     => 'localhost:5432',
+			'database' => 'consultora',
+			'username' => 'postgres',
+			'password' => '12345',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',

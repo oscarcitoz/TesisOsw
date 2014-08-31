@@ -45,8 +45,9 @@ class ActivityController extends BaseController
 		$count_project = $nombre->proyect()->count();	
 		$project = $nombre->proyect()->orderBy('date_create','desc')->take(5)->get();		
 		$activity = $nombre->activitie()->orderBy('date_create','desc')->paginate(3);
+		$empleado=$nombre->employee()->first();
 
-		return View::make('miConsultora.miConsultora_Activity', array('menu' => '1','nombre'=>$nombre->email,"project"=> $project,"count_project"=>$count_project,"activity"=>$activity));
+		return View::make('miConsultora.miConsultora_Activity', array('menu' => '1','nombre'=>$empleado->first_name,"project"=> $project,"count_project"=>$count_project,"activity"=>$activity));
 	}
 
 	public function createActivity()

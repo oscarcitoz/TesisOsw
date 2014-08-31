@@ -159,7 +159,7 @@ class CustomerController extends BaseController {
 		}
 		$rules= array(
 			'invisible' =>'required',
-			'name' => 'required', 
+			'name' => '', 
 			'rif' => '',
 			'locality' => 'required',
 			'phone' => 'numeric|min:999999999',
@@ -178,8 +178,8 @@ class CustomerController extends BaseController {
 
 		$validator=Validator::make(Input::all(),$rules);
 		if(!$validator->fails()){
-			$Customer->name = Input::get('name');
-			$Customer->rif = Input::get('rif');
+			//$Customer->name = Input::get('name');
+			//$Customer->rif = Input::get('rif');
 			$Customer->email = Input::get('email');
 			$Customer->locality = Input::get('locality');
 			$Customer->phone = Input::get('phone');
@@ -187,6 +187,7 @@ class CustomerController extends BaseController {
 			$Customer->phone_contact = Input::get('phone_contact');
 			//return $Customer;
 			try{
+				
 				$Customer->save();
 				return Redirect::to('/customer/edtiCustomer'.'/'.$id)->with('messageRegistrar','Se modificaron los datos correctamente');
 			}

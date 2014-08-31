@@ -9,11 +9,11 @@ class EmployeeTableSeeder extends Seeder {
 
 		$User_id = DB::table('users')
                                     ->select('id')
-                                    ->where('email', 'mamaOswaldo@hotmail.com')
+                                    ->where('email', 'consultoraintegral.ldt.c.a@gmail.com')
                                     ->first()
                                     ->id;
 
-	$roles1 = array('user_id'=> $User_id,'first_name'=>'MAMA','last_name'=>'Oswaldo','ident_card'=>'56456456');
+	$roles1 = array('user_id'=> $User_id,'first_name'=>'Administrador','last_name'=>'Red','ident_card'=>'0000');
 
 	DB::table('employees')->insert($roles1);
 

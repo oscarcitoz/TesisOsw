@@ -76,8 +76,9 @@ public function proyectoReg()
 			$lis_aux->description = $act->description;
 			array_push($array_list2, $lis_aux);
 		}
+		$empleado=$nombre->employee()->first();
 
-		return View::make('miConsultora.miConsultora', array('menu' => '1','nombre'=>$nombre->email,"project"=>$array_list,"activity"=>$array_list2,"count_project"=>$count_project,"count_activity"=>$count_activity));
+		return View::make('miConsultora.miConsultora', array('menu' => '1','nombre'=>$empleado->first_name,"project"=>$array_list,"activity"=>$array_list2,"count_project"=>$count_project,"count_activity"=>$count_activity));
 	}
 
 	public function consultora_project()
@@ -86,8 +87,9 @@ public function proyectoReg()
 		$project = $nombre->proyect()->orderBy('date_create','desc')->paginate(3);
 		$count_activity = $nombre->activitie()->count();
 		$activity = $nombre->activitie()->orderBy('date_create','desc')->take(5)->get();
+		$empleado=$nombre->employee()->first();
 
-		return View::make('miConsultora.miConsultora_Project', array('menu' => '1','nombre'=>$nombre->email,"project" => $project,"activity"=>$activity,"count_activity"=>$count_activity));
+		return View::make('miConsultora.miConsultora_Project', array('menu' => '1','nombre'=>$empleado->first_name,"project" => $project,"activity"=>$activity,"count_activity"=>$count_activity));
 	}
 
 	public function buscarProyect(){
@@ -185,12 +187,19 @@ public function proyectoReg()
 			$record->status="Propuesta";
 			$record->comment="Se da inicio al proyecto";
 			$record->date_create=$now;
-			
+			$id=Auth::user()->id;
 			
 			try {
 				$project->save();
 				$record->project_id=$project->id;	
 				$record->save();
+				$usuarios = DB::table('project_user')->where('project_id', '=', $project->id)->where('user_id', '=', $id)->first();
+				if($usuarios==null){
+				$relacion = array('project_id'=> $project->id,
+					'user_id'=> $id,
+					'date_create'=> $now);
+				DB::table('project_user')->insert($relacion);
+				}
 				return Redirect::to('/project/registrar')->with('messageRegistrar','Se Registró al usuario correctamente y se ha enviado un correo con los datos');
 			} catch (Exception $e) {
 				return Redirect::to('/project/registrar')->with('messageErrorRegis','Se produjo un error')->withInput();	
@@ -537,6 +546,21 @@ public function proyectoReg()
 					$record->save();
 					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se actualizo correctamente el estatus');
 
+				}else if(($Project->status=="Ejecución" and Input::get('status')=="Finalizado") or Input::get('status')=="Cerrado"){
+								
+					$Project->status=Input::get('status');
+					$Project->date_end=$now;
+					$Project->save();
+					
+					$record= new Record();
+					$record->status=Input::get('status');
+					$record->comment=Input::get('comment');
+					$record->date_create=$now;
+					$record->project_id=$id;	
+					$record->save();
+							
+					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se ha finalizado el proyecto');
+
 				}else if($aux2-$aux1==1 and $Project->status!="Paralizado"){
 								
 					$Project->status=Input::get('status');
@@ -550,7 +574,7 @@ public function proyectoReg()
 					$record->save();
 							
 					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se actualizo correctamente el estatus');
-				}else if((Input::get('status')=="Paralizado" or Input::get('status')=="Cerrado") and $Project->status!="Finalizado"){
+				}else if(Input::get('status')=="Paralizado"){
 					$Project->status=Input::get('status');
 					$Project->save();
 					

@@ -52,7 +52,7 @@ Usuario
 @if($errors->has('name'))
     {{Form::label('name',$errors->first('name'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('name', $customer->name, array('class'=>'form-control',"required"=>"true" , 'maxlength'=>'255'))}}
+{{Form::text('name', $customer->name, array('class'=>'form-control' , 'maxlength'=>'255','disabled'))}}
 </fieldset>
 
 <fieldset class="form-group col-md-5">
@@ -60,7 +60,7 @@ Usuario
 @if($errors->has('rif'))
     {{Form::label('rif',$errors->first('rif'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('rif',$customer->rif, array('class'=>'form-control','maxlength'=>'15'))}}
+{{Form::text('rif',$customer->rif, array('class'=>'form-control','maxlength'=>'15','disabled'))}}
 </fieldset>
 </div>
 
@@ -70,7 +70,7 @@ Usuario
 @if($errors->has('email'))
     {{Form::label('email',$errors->first('email'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('email', $customer->email, array('class'=>'form-control',"required"=>"true" , 'maxlength'=>'50'))}}
+{{Form::text('email', $customer->email, array('class'=>'form-control' , 'maxlength'=>'50'))}}
 </fieldset>
 
 <fieldset class="form-group col-md-5">

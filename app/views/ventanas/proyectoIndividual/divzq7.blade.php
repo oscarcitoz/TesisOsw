@@ -1,14 +1,14 @@
 <div name="izq" id="Dizq7" class="oculta">
 
 <ul class="breadcrumb">
-  <li class="active">Empleados asociados al proyecto</li>
+  <li class="active">Consulta de Actividades</li>
 </ul>
 
 
 @if ($activity!=null)
 	@foreach ($activity as $act)
 		<div class="table-responsive">
-			<a class="text-muted" href="/actividad/individual/{{$act->id}}">
+			<a class="text-muted" href="{{URL::to('/actividad/individual/')}}/{{$act->id}}">
 				<table class="table" >
 					<tr class="success" >
 						<td  width="10%" rowspan="3"><img class="img-rounded" width="100" src="{{asset('images/activi.jpg')}}" alt="Smiley face" ></td>

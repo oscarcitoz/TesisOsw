@@ -75,6 +75,15 @@ $(function() {
  enviarAjax();
   event.preventDefault();
 });
+
+$( "#registro" ).submit(function( event ) {
+ 
+ var cadena=$("#email").val();
+ cadena=cadena.toLowerCase();
+ $("#email").val(cadena);
+});
+
+
 $( "#tags" ).keydown(function(tecla){
     if (tecla.keyCode == 8){
        $("#invisible_id").val("");

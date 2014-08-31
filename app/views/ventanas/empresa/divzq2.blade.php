@@ -29,7 +29,7 @@
 
 
 <div class=​"well bs-component">​
-{{Form::open(array('url'=>'/empresa/create','method'=>'POST'))}}
+{{Form::open(array('url'=>'/empresa/create','method'=>'POST','id'=>"registro"))}}
 <div class="row">
 <fieldset class="form-group col-md-5">
 {{Form::label('first_name', 'Nombre: ')}}
@@ -53,7 +53,7 @@
 @if($errors->has('email'))
     {{Form::label('email',$errors->first('email'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::email('email',Input::old('email'), array('class'=>'form-control',"required"=>"true"))}}
+{{Form::email('email',Input::old('email'), array('class'=>'form-control',"required"=>"true",'id'=>"email"))}}
 </fieldset>
 
 <fieldset class="form-group col-md-5">
