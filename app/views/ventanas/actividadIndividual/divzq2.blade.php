@@ -28,6 +28,9 @@
 		<div class="row">
 			<fieldset class="col-md-9 col-md-offset-9">
 	    		<input type="button" id="agrega" class="btn btn-primary btn-lg" value="Agregar"/>  
+	    		@if ($document_project->count() > 0)
+						<br><input type="radio" name="doc" id="doc" checked  value="0">Agregar Documento Nuevo<br>
+				@endif
 			</fieldset>
 	    </div>
 	</div>
@@ -36,6 +39,7 @@
 	<div class=​"well bs-component" id="cargar">
 		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $activity->status=="Asignada" and $activity->user_id==Auth::user()->id)
 		{{Form::open(array('url'=>'/actividad/individual/agregaDocument','files'=>true,'method'=>'post', 'id'=>'formulario_Document'))}}
+		{{ Form::hidden('modificar', '0', array('id' => 'invisible_id2')) }}
 		{{ Form::hidden('invisible', $activity->id, array('id' => 'invisible_id')) }}
 			<div class="row">
 			  <fieldset class="form-group col-md-5">
@@ -51,7 +55,7 @@
 			    	{{Form::label('attached',$errors->first('attached'),array('class'=>'label label-warning'))}}
 			    @endif
 		      {{Form::File('attached', array('class'=>'form-control',"required"=>"true"))}}
-		    <p class="help-block">Debes subir exclusivamente archivos PDF</p>
+		    <p class="help-block">Debes subir exclusivamente archivos PDF, XLSX (Archivos Excel 2007 en adelante), DOCX (Archivos WORD 2007 en adelante)</p>
 		  </fieldset>
 
 		  <fieldset class="form-group col-md-8">
@@ -67,6 +71,7 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
+							<th>ID</th>
 							<th>Descripci&oacute;n</th>
 							<th>Descargar</th>
 						</tr>
@@ -74,6 +79,7 @@
 					<tbody>
 			@foreach ($document_project as $doc)
 				<tr>
+					<td><input type="radio" name="doc" id="doc"value="{{$doc->id}}"></td>
 					<td>Descargar {{$doc->description}}</td>
 					<td><a class="btn btn-primary btn-lg" href="{{asset($doc->attached)}}" download={{$nombre}}><img class="img-rounded" width="20" src="{{asset('images/descargar.png')}}" alt="Descargar Archivo"></a></td>
 				</tr>

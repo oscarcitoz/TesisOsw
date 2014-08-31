@@ -3,23 +3,33 @@
 class Document_projectController extends BaseController 
 {
 
+	public function __construct(){
+		$this->beforeFilter('auth');
+	}
+
 
 	public function agrega()
 	{
 		$id=Input::get('invisible');
-		if($id=="" or $id=="null"){
+		$modif=Input::get('modificar');
+		if($id=="" or $id=="null" or $modif=="" or $modif=="null"){
 			return Redirect::to('/');
 		}
 		$rules=array(
-			'attached'=>'required|mimes:xls,xlsx,pdf',
+			'attached'=>'required|mimes:xlsx,pdf,docx',
 			'invisible' => 'required', 
+			'modificar' => 'required',
 			'description' => 'required', 
 		);	
 		$validator=Validator::make(Input::all(),$rules);
 		if(!$validator->fails())
 		{
 			try{
-				$doc= new Documents_project();
+				if($modif==0){
+					$doc= new Documents_project();
+				}else{
+					$doc= Documents_project::find($modif);
+				}
 				$doc->description=Input::get('description');
 				$doc->project_id=$id;
 				$doc->subir(Input::file('attached'));

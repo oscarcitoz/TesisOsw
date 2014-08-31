@@ -7,6 +7,7 @@ class CustomerController extends BaseController {
 	{
 		$this->beforeFilter('auth');	
 		$this->beforeFilter('admin',array('only'=>array('edit','update')));	
+		$this->beforeFilter('adminGerente',array('only'=>array('updateCustomer','editCustomer','buscarCustomer','CrearCustomer','RegistrarCustomer')));
 	}
 
 	public function index()

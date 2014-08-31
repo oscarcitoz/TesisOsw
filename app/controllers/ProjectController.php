@@ -5,6 +5,7 @@ class ProjectController extends BaseController
 
 	public function __construct(){
 		$this->beforeFilter('auth');
+		$this->beforeFilter('adminGerente',array('only'=>array('proyectoReg','create','proyectoDocument','proyectoDocument_varios','proyectoStatus','proyectoAct','actualizaMonto','actualizaDocument','CambiarStatus','agrega','createActivity')));
 	}
 
 	public function proyecto()
@@ -435,20 +436,7 @@ public function proyectoReg()
 		return View::make('ventanas.proyectoIndividual', array('menu' => '3','nombre'=>$nombre,'menuIzq'=>'6','project'=>$Project,'combox'=>$status,'Customer'=>$Customer,'document_project'=>$document_project,'record'=>$record,'types_activitie'=>$types_activitie,'employees'=>$array_list,'activity'=>$array_list2));
 	}
 
-	public function proyectoEdit($id){
-
-		$Project=Project::join('employees', 'projects.user_id', '=', 'employees.user_id')
-				->where('projects.id', $id)
-				->first();
-		$Customer=$Project->Customer()->first();
-		$status = array('Propuesta' => 'Propuesta', 
-			'Adjudicado' => 'Adjudicado', 
-			'Ejecución' => 'Ejecución', 
-			'Finalizado' => 'Finalizado', 
-			'Paralizado' => 'Paralizado', 
-			'Cerrado' => 'Cerrado', );	
-		return View::make('ventanas.proyectoIndividual.editProject', array('project'=>$Project,'combox'=>$status));
-	}
+	
 
 	public function actualizaMonto()
 	{

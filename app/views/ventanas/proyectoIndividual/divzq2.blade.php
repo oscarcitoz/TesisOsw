@@ -72,7 +72,7 @@
 	    		{{Form::label('document_budget',$errors->first('document_budget'),array('class'=>'label label-warning'))}}
 	    	@endif
 		    {{Form::File('document_budget', array('class'=>'form-control',"required"=>"true"))}}
-		    <p class="help-block">Debes subir exclusivamente archivos PDF</p>
+		    <p class="help-block">Debes subir exclusivamente archivos PDF o XLSX (Archivos Excel 2007 en adelante)</p>
 		  	</fieldset>
 
 			<fieldset class="form-group col-md-8">

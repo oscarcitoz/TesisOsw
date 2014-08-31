@@ -81,6 +81,10 @@ Proyecto
 
 $(function() {
 
+$( "input[name=doc]:radio" ).change(function() {
+  $("#invisible_id2").val(this.value);
+});
+
 $( "#formulario_Status" ).submit(function( event ) {
     if (confirm("¿Dese cambiar el estatus del proyecto?") == false) {
       return false;}
@@ -131,8 +135,11 @@ $( "#tags" ).keydown(function(tecla){
                                     label: item.first_name+' '+item.last_name,
                                     id: item.user_id,
                                     desc: item.profession,
-                                    cedu:item.ident_card
-                                  
+                                    cedu:item.ident_card,
+                                    email:item.email,
+                                    phone_cel: item.phone_cel,
+                                    phone_local: item.phone_local,
+                                    specialty: item.phone_local                                  
                                     };
                                     
                             }));
@@ -146,7 +153,18 @@ $( "#tags" ).keydown(function(tecla){
           // add placeholder to get the comma-and-space at the end
           //terms.push( "" );
           $("#invisible_user_id").val(ui.item.id);
-          
+          var tag="<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>Empleado</h3></div>"
+                +"<div class='panel-body'>"
+                +"Nombre: "+ui.item.label+"<br>"
+                +"Correo Electronico: "+ui.item.email+"<br>"
+                +"Cedula: "+ui.item.cedu+"<br>"
+                +"Profesion: "+ui.item.desc+"<br>"
+                +"Especialidad: "+ui.item.specialty+"<br>"
+                +"Telefono Celular: "+ui.item.phone_cel+"<br>"
+                +"Telefono Local: "+ui.item.specialty+"<br>"
+                +"</div><div class='panel-footer'>"
+                +"</div></div>";
+        $("#respuesta3").append(tag);
           return true;
         },
         

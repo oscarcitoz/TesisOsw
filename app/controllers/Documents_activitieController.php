@@ -3,23 +3,32 @@
 class Documents_activitieController extends BaseController 
 {
 
-
+	public function __construct(){
+		$this->beforeFilter('auth');
+	}
+	
 	public function agrega()
 	{
 		$id=Input::get('invisible');
-		if($id=="" or $id=="null"){
+		$modif=Input::get('modificar');
+		if($id=="" or $id=="null" or $modif=="" or $modif=="null"){
 			return Redirect::to('/');
 		}
 		$rules=array(
-			'attached'=>'required|mimes:xls,xlsx,pdf',
+			'attached'=>'required|mimes:xlsx,pdf,docx',
 			'invisible' => 'required', 
+			'modificar' => 'required',
 			'description' => 'required', 
 		);	
 		$validator=Validator::make(Input::all(),$rules);
 		if(!$validator->fails())
 		{
 			try{
-				$doc= new Documents_activitie();
+				if($modif==0){
+					$doc= new Documents_activitie();
+				}else{
+					$doc= Documents_activitie::find($modif);
+				}
 				$doc->description=Input::get('description');
 				$doc->activitie_id=$id;
 				$doc->subir(Input::file('attached'));

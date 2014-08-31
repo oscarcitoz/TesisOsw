@@ -13,6 +13,16 @@ Proyecto
      <script src="{{asset('js/jquery-ui.min.js')}}"></script>
      <script type="text/javascript">
      	$(function() {
+
+        $( "input[name=doc]:radio" ).change(function() {
+          $("#invisible_id2").val(this.value);
+          if(this.value==0){
+            $("#agrega").val("Agregar");
+          }else{
+            $("#agrega").val("Modficar");
+          }
+        });
+
 			  $("#cargar").hide();
 
 			$( "#agrega" ).click(function() {

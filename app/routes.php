@@ -67,7 +67,7 @@ Route::post('/proyecto/buscar/tipo', 'ProjectController@buscarTipo');
 Route::post('/proyecto/buscar/status', 'ProjectController@buscarStatus');
 Route::post('/proyecto/create', 'ProjectController@create');
 Route::get('/project/registrar', 'ProjectController@proyectoReg');
-Route::get('/project/edit/{id}', 'ProjectController@proyectoEdit');
+
 
 //customer
 Route::get('/customer/buscar/customer', 'CustomerController@buscarCustomer');
