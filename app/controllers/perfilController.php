@@ -17,8 +17,16 @@ class perfilController extends BaseController {
 		$login=$usuario->email;
 		$perfil=$usuario->role()->first()->name;
 		$empleado=$usuario->employee()->first();
+		try {
+			$fecha= explode("-", $empleado->date_birth);
+			$fecha=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+			}
+			catch(Exception $e)
+			{
+				$fecha="";
+			}
 		$nombre=$empleado->first_name;
-		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'1'));
+		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'fecha'=>$fecha,'menuIzq'=>'1'));
 
 	}
 
@@ -29,7 +37,15 @@ class perfilController extends BaseController {
 		$perfil=$usuario->role()->first()->name;
 		$empleado=$usuario->employee()->first();
 		$nombre=$empleado->first_name;
-		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'3'));
+		try {
+			$fecha= explode("-", $empleado->date_birth);
+			$fecha=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+			}
+			catch(Exception $e)
+			{
+				$fecha="";
+			}
+		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'fecha'=>$fecha,'menuIzq'=>'3'));
 
 	}
 
@@ -41,7 +57,15 @@ class perfilController extends BaseController {
 		$perfil=$usuario->role()->first()->name;
 		$empleado=$usuario->employee()->first();
 		$nombre=$empleado->first_name;
-		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'2'));
+		try {
+			$fecha= explode("-", $empleado->date_birth);
+			$fecha=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+			}
+			catch(Exception $e)
+			{
+				$fecha="";
+			}
+		return View::make('ventanas.perfil', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'fecha'=>$fecha,'menuIzq'=>'2'));
 
 	}
 
@@ -51,7 +75,15 @@ class perfilController extends BaseController {
 		$login=$usuario->email;
 		$empleado=$usuario->employee()->first();
 		$nombre=$empleado->first_name;
-		return View::make('users/changePass', array('menu' => '2','nombre'=>$nombre,'empleado'=>$empleado,'login'=>$login,'menuIzq'=>'1'));
+		try {
+			$fecha= explode("-", $empleado->date_birth);
+			$fecha=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+			}
+			catch(Exception $e)
+			{
+				$fecha="";
+			}
+		return View::make('users/changePass', array('menu' => '2','nombre'=>$nombre,'empleado'=>$empleado,'login'=>$login,'menuIzq'=>'1','fecha'=>$fecha));
 	}
 	public function passwordUpdate()
 	{

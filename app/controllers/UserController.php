@@ -166,7 +166,15 @@ class UserController extends BaseController
 		$empleado=$usuario->employee()->first();
 		$login=$usuario->email;
 		$status=$usuario->status;
-		return View::make('users.show', array('empleado'=>$empleado,'login'=>$login,'id'=>$id,'status'=>$status));
+		try {
+			$fecha= explode("-", $empleado->date_birth);
+			$fecha=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+			}
+			catch(Exception $e)
+			{
+				$fecha="";
+			}
+		return View::make('users.show', array('empleado'=>$empleado,'login'=>$login,'id'=>$id,'status'=>$status,'fecha'=>$fecha));
 		}
 		else{
 		echo "NO encontrado";}
@@ -205,9 +213,9 @@ class UserController extends BaseController
 	public function store(){
 
 		$rules=array(
-			'first_name' =>'required',
-			'last_name' =>'required',
-			'ident_card'=>'required',
+			'first_name' =>'required|min:3',
+			'last_name' =>'required|min:3',
+			'ident_card'=>'required|min:6',
 			//'username' =>'required|max:50|unique:users,username',
 			'email' =>'required|email|unique:users,email',
 			'rol'=>'required',
@@ -246,8 +254,9 @@ class UserController extends BaseController
 			}
 
 			catch (Exception $e) {
+				//return $e;
 
-				return Redirect::to('/empresa/registrar')->with('messageErrorRegis','Se produjo un error y verifique sus datos')->withInput();
+				return Redirect::to('/empresa/registrar')->with('messageErrorRegis','Se produjo un error, verifique sus datos')->withInput();
 
 			}
 			//try
@@ -293,12 +302,6 @@ class UserController extends BaseController
 		$perfil=$usuario->role()->first()->name;
 		$empleado=$usuario->employee()->first();
 		$nombre=$empleado->first_name;
-	try{
-		$fecha= explode("-", $empleado->date_birth);
-		$empleado->date_birth=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
-	}catch(Exception $e) {
-		$empleado->date_birth='';
-	}	
 		return View::make('users.edit', array('menu' => '2','nombre'=>$nombre,'login'=>$login,'perfil'=>$perfil,'empleado'=>$empleado,'menuIzq'=>'2'));
 
 	
@@ -308,17 +311,17 @@ class UserController extends BaseController
 	{
 		$usuario=Auth::user();
 				$rules= array(
-					'nombre' =>'required',
-					'apellido' =>'required',
-					'cedula' =>'required',
-					'telefonoLocal' =>'required',
-					'telefonoCel' =>'required',
-					'direccion' =>'required',
+					'nombre' =>'required|min:3',
+					'apellido' =>'required|min:3',
+					'cedula' =>'required|min:6',
+					'telefonoLocal' =>'required|min:6',
+					'telefonoCel' =>'required|min:6',
+					'direccion' =>'required|min:6',
 					'estadoCivil' =>'required',
 					'nacimiento' =>'required', 
 					'sexo' =>'required',
-					'profesion' =>'required',
-					'especialidad' =>'required',
+					'profesion' =>'required|min:3',
+					'especialidad' =>'required|min:3',
 					'curriculum'=>'mimes:pdf',
 					'photo'=>'image',
 					);
@@ -328,6 +331,7 @@ class UserController extends BaseController
 				if(!$validator->fails())
 				{
 					$empleado=$usuario->employee()->first();
+					
 					if(Input::file('curriculum')!= "")
 					{
 						$empleado->deleteArchivo();
@@ -366,13 +370,13 @@ class UserController extends BaseController
 					}
 					catch(Exception $e)
 					{
-						return Redirect::to('/perfil/datosPersonales/modificar')->with('messageEdit','Se produjo un error');
+						return Redirect::to('/perfil/datosPersonales/modificar')->with('messageEdit','Se produjo un error')->withInput();
 
 					}
 				}
 				else
 				{
-					return Redirect::to('perfil/datosPersonales/modificar')->withErrors($validator);
+					return Redirect::to('perfil/datosPersonales/modificar')->withErrors($validator)->withInput();
 				}
 
 	}

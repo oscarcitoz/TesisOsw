@@ -28,7 +28,7 @@
     <td > <span class='azulito'>Documento de Identidad</span>&nbsp;{{$empleado->ident_card}}</td>
   </tr>
   <tr>
-    <td > <span class='azulito'>Fecha de Nacimiento</span>&nbsp;{{$empleado->date_birth}}</td>
+    <td > <span class='azulito'>Fecha de Nacimiento</span>&nbsp;{{$fecha}}</td>
     <td > <span class='azulito'>G&eacute;nero</span>&nbsp;{{$empleado->sex}}</td>
   </tr>
   <tr>

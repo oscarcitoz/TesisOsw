@@ -7,6 +7,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class Employee extends Eloquent {
 
+	protected $primaryKey = 'user_id';
 	public $timestamps = false;
 	const ARCHIVOS_DIR='archivos';
 	const FOTOS_DIR='fotos';
@@ -170,7 +171,7 @@ class Employee extends Eloquent {
 
 		if(@unlink($this->public_path.$this->basedir.$this->curriculum))
 		{
-			$this->delete();
+			//$this->delete();
 
 		}
 
@@ -182,7 +183,7 @@ class Employee extends Eloquent {
 
 		if(@unlink($this->public_path.$this->basedir.$this->photo))
 		{
-			$this->delete();
+			//$this->delete();
 
 		}
 

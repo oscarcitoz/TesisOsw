@@ -73,7 +73,7 @@ Perfil
 @if($errors->has('cedula'))
     {{Form::label('cedula',$errors->first('cedula'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('cedula', $empleado->ident_card, array('class'=>'form-control',"required"=>"true"))}}
+{{Form::text('cedula', $empleado->ident_card, array('class'=>'form-control',"required"=>"true","maxlength"=>"15"))}}
 </fieldset>
 </div>
 <div class="row">
@@ -82,7 +82,7 @@ Perfil
 @if($errors->has('telefonoLocal'))
     {{Form::label('telefonoLocal',$errors->first('telefonoLocal'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('telefonoLocal', $empleado->phone_local, array('class'=>'form-control',"required"=>"true"))}}
+{{Form::text('telefonoLocal', $empleado->phone_local, array('class'=>'form-control',"required"=>"true","maxlength"=>"15"))}}
 </fieldset>
 
 <fieldset class="form-group col-md-5">
@@ -90,7 +90,7 @@ Perfil
 @if($errors->has('telefonoCel'))
     {{Form::label('telefonoCel',$errors->first('telefonoCel'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('telefonoCel', $empleado->phone_cel, array('class'=>'form-control',"required"=>"true"))}}
+{{Form::text('telefonoCel', $empleado->phone_cel, array('class'=>'form-control',"required"=>"true","maxlength"=>"15"))}}
 </fieldset>
 </div>
 <div class="row">

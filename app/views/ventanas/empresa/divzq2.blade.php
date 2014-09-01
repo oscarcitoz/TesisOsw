@@ -36,7 +36,7 @@
 @if($errors->has('first_name'))
     {{Form::label('first_name',$errors->first('first_name'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('first_name', Input::old('name'), array('class'=>'form-control',"required"=>"true"))}}
+{{Form::text('first_name', Input::old('first_name'), array('class'=>'form-control',"required"=>"true"))}}
 </fieldset>
 
 <fieldset class="form-group col-md-5">
@@ -53,7 +53,7 @@
 @if($errors->has('email'))
     {{Form::label('email',$errors->first('email'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::email('email',Input::old('email'), array('class'=>'form-control',"required"=>"true",'id'=>"email"))}}
+{{Form::email('email',Input::old('email'), array('class'=>'form-control',"required"=>"true",'id'=>"email","maxlength"=>"50"))}}
 </fieldset>
 
 <fieldset class="form-group col-md-5">
@@ -61,7 +61,7 @@
 @if($errors->has('ident_card'))
     {{Form::label('ident_card',$errors->first('ident_card'),array('class'=>'label label-warning'))}}
     @endif
-{{Form::text('ident_card',Input::old('ident_card'), array('class'=>'form-control',"required"=>"true"))}}
+{{Form::text('ident_card',Input::old('ident_card'), array('class'=>'form-control',"required"=>"true","maxlength"=>"15"))}}
 </fieldset>
 </div>
 <div class="row">
