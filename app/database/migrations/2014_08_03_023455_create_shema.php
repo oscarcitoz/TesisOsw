@@ -61,9 +61,9 @@ class CreateShema extends Migration {
 	        $table->string('phone_local',15)->nullable();
 	        $table->string('phone_cel',15)->nullable();
 	        $table->string('address',255)->nullable();
-	        $table->string('civil_status',1)->nullable();
+	        $table->string('civil_status',15)->nullable();
 	        $table->date('date_birth')->nullable();
-	        $table->string('sex',1)->nullable();
+	        $table->string('sex',15)->nullable();
 	        $table->string('profession',100)->nullable();
 	        $table->string('specialty',100)->nullable();
 	        $table->string('photo',255)->nullable();
