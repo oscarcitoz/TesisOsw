@@ -2,6 +2,18 @@
 @section('title')
 Login
   @stop
+@section('scripts')
+    @parent
+    <script type="text/javascript">
+	function env() {
+ var cadena=$("#email").val();
+ cadena=cadena.toLowerCase();
+ $("#email").val(cadena);
+ return true;
+};
+</script>
+  @stop
+
 
 
 @section('container')
@@ -43,7 +55,7 @@ Login
 			@if($errors->has('email'))
 			{{Form::label('email',$errors->first('email'),array('class'=>'label label-warning'))}}
 			@endif
-		{{Form::email('email',Input::old('email'),array('class'=>'form-control',"required"=>"true"))}}
+		{{Form::email('email',Input::old('email'),array('class'=>'form-control',"required"=>"true","id"=>"email"))}}
 		</div>
 	</fieldset>
 
@@ -58,7 +70,7 @@ Login
 	</fieldset>
 <fieldset class="form-group-group row">
 <div class="col-md-4 col-md-offset-4">
-	<input type="submit" class="btn btn-primary" value="Iniciar Sesion">
+	<input type="submit" class="btn btn-primary" value="Iniciar Sesion" onclick="env();">
 	<span class="register">¿Olvidaste tu Contraseña? <a href="{{URL::to('/password/remind')}}">Recuperar</a></span>
 </div>
 	</fieldset>

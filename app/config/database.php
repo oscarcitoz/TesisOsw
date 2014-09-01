@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sqlite',
+	'default' => 'pgsql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost:5432',
+			'host'     => 'localhost',
 			'database' => 'consultora',
 			'username' => 'postgres',
-			'password' => '12345',
+			'password' => '20151526',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
