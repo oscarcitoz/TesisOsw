@@ -11,7 +11,7 @@
 		<thead>
 			<tr>
 				<th>Nombre y Apeliido</th>
-				<th>Cedula</th>
+				<th>C&eacute;dula</th>
 				<th>Profesi&oacute;n</th>
 				<th>Especialidad</th>
 				<th>Estatus</th>
@@ -24,7 +24,7 @@
 		<td>{{$emplo->ident_card}}</td>
 		<td>{{$emplo->profession}}</td>
 		<td>{{$emplo->specialty}}</td>
-		<td>{{$emplo->status}}</td>
+		<td>{{$emplo->status==1?"Activo" : "Inactivo"}}</td>
 	</tr>
 	@endforeach
 	</tbody>
@@ -34,7 +34,7 @@
 	<fieldset class="form-group col-md-8">
 		<table class="table" >
 			<tr class="danger">
-				<td><strong>No existe ningun Empleado asociado al Proyecto</strong></td>
+				<td><strong>No existe ning&uacute;n Empleado asociado al Proyecto</strong></td>
 			</tr>
 		</table>
 	</fieldset>

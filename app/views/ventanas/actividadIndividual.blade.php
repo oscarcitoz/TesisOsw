@@ -51,8 +51,8 @@ Proyecto
         if(msg.indexOf('ERROR')==-1)
     { var noti="<div class='alert alert-dismissable alert-info'>"
       +"<button type='button' class='close' data-dismiss='alert'>×</button>"
-      +"<strong>Presupuesto Actualizado! </strong>"
-      +"Modificación Realizada con Exito"
+      +"<strong>Actividad Actualizada! </strong>"
+      +"Modificaci&oacute;n Realizada con &Eacute;xito"
       +"</div>";
       $("#respuesta2").html(noti);
       $("#fecha_fin").html(msg);

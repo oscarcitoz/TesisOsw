@@ -128,7 +128,7 @@ $( "#tags" ).keydown(function(tecla){
     $( "#tags" ).autocomplete({
       minLength: 0,
        source:function( request, response ) {
-        urlA= "{{URL::to('/empresa/buscar/nombre')}}";
+        urlA= "{{URL::to('/empresa/buscar/nombre2')}}";
        $("#respuesta3").html("");
          $.ajax({
                     url: urlA,
@@ -163,7 +163,7 @@ $( "#tags" ).keydown(function(tecla){
                 +"<div class='panel-body'>"
                 +"Nombre: "+ui.item.label+"<br>"
                 +"Correo Electronico: "+ui.item.email+"<br>"
-                +"Cedula: "+ui.item.cedu+"<br>"
+                +"C&eacute;dula: "+ui.item.cedu+"<br>"
                 +"Profesion: "+ui.item.desc+"<br>"
                 +"Especialidad: "+ui.item.specialty+"<br>"
                 +"Telefono Celular: "+ui.item.phone_cel+"<br>"

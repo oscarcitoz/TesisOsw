@@ -200,9 +200,9 @@ public function proyectoReg()
 					'date_create'=> $now);
 				DB::table('project_user')->insert($relacion);
 				}
-				return Redirect::to('/project/registrar')->with('messageRegistrar','Se Registró al usuario correctamente y se ha enviado un correo con los datos');
+				return Redirect::to('/project/registrar')->with('messageRegistrar','Se Registró el proyecto correctamente');
 			} catch (Exception $e) {
-				return Redirect::to('/project/registrar')->with('messageErrorRegis','Se produjo un error')->withInput();	
+				return Redirect::to('/project/registrar')->with('messageErrorRegis','Se produjo un error inesperado')->withInput();	
 			}
 		}else{
 			return Redirect::to('/project/registrar')->withErrors($validator)->withInput();
@@ -493,7 +493,7 @@ public function proyectoReg()
 				$Project->subir(Input::file('document_budget'));
 				$Project->document_budget;
 				$Project->save();
-				return Redirect::to('/project/individual/document'.'/'.$id)->with('messageRegistrar','Se actualizo el documento del presupuesto correctamente');
+				return Redirect::to('/project/individual/document'.'/'.$id)->with('messageRegistrar','Se actualiz&oacute; el documento del presupuesto correctamente');
 			}catch (Exception $e) {
 					return Redirect::to('/project/individual/document'.'/'.$id)->with('messageErrorRegis','Se produjo un error')->withInput();
 			}
@@ -544,7 +544,7 @@ public function proyectoReg()
 					$record->date_create=$now;
 					$record->project_id=$id;	
 					$record->save();
-					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se actualizo correctamente el estatus');
+					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se actualiz&oacute; correctamente el estatus');
 
 				}else if(($Project->status=="Ejecución" and Input::get('status')=="Finalizado") or Input::get('status')=="Cerrado"){
 								
@@ -573,7 +573,7 @@ public function proyectoReg()
 					$record->project_id=$id;	
 					$record->save();
 							
-					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se actualizo correctamente el estatus');
+					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','Se actualiz&oacute; correctamente el estatus');
 				}else if(Input::get('status')=="Paralizado"){
 					$Project->status=Input::get('status');
 					$Project->save();
@@ -588,9 +588,9 @@ public function proyectoReg()
 					return Redirect::to('/project/individual/status'.'/'.$id)->with('messageStatus','El proyecto a sido Detenido');
 				}else{
 					if( $Project->status=="Paralizado"){
-						return Redirect::to('/project/individual/status'.'/'.$id)->with('messageErrorStatus','No se actualizo el estatus debido a que se debe reactivar el proyecto regresando a su fase anterior '.$ultRecord->status);
+						return Redirect::to('/project/individual/status'.'/'.$id)->with('messageErrorStatus','No se actualiz&oacute; el estatus debido a que se debe reactivar el proyecto regresando a su fase anterior '.$ultRecord->status);
 					}else{
-						return Redirect::to('/project/individual/status'.'/'.$id)->with('messageErrorStatus','No se actualizo el estatus debido a que debe ser una fase siguiente a la actual '.$ultRecord->status);
+						return Redirect::to('/project/individual/status'.'/'.$id)->with('messageErrorStatus','No se actualiz&oacute; el estatus debido a que debe ser una fase siguiente a la actual '.$ultRecord->status);
 					}
 				}
 			}catch (Exception $e) {

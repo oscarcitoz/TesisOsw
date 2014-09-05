@@ -23,6 +23,40 @@ class UserController extends BaseController
 		
 	}
 
+
+	public function buscarNombre2(){
+			$nombre="";
+			$empleados="";
+			if((isset($_GET['term'])))
+			{
+				$var=$_GET['term'];
+				$var = trim($var);
+				$pos = strrpos($var, " ");
+				if ($pos === false) { 
+					
+				$nombre=$var;
+				$empleados=DB::table('employees')->join('users', 'employees.user_id', '=', 'users.id')->where('employees.first_name', 'LIKE', '%'.$nombre.'%')->where('users.status', '=', 1)->get();
+				
+				}
+				else { 
+
+					$lista=explode(" ",$var);
+				
+					$empleados=DB::table('employees')->join('users', 'employees.user_id', '=', 'users.id')->where(function ($query) use ($lista) {
+				    $query->where('employees.first_name', 'LIKE', '%'.$lista[0].'%')
+				    	->where('employees.last_name', 'LIKE', '%'.$lista[1].'%')
+							->where('users.status', '=', 1);})->get();
+				
+				}
+				
+				return $empleados;
+			}
+
+			
+	}
+
+
+
 		public function buscarNombre(){
 			$nombre="";
 			$empleados="";

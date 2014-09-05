@@ -56,7 +56,7 @@ $(function() {
 {{Form::open(array('url'=>'/consultora/more_project','method'=>'GET'))}}
 	<div style='font-size:16;'>
 		<ul class="breadcrumb">
-		  <li>Ultimos 5 Proyectos</li>
+		  <li>&uacute;ltimos 5 Proyectos</li>
 		</ul>
 	</div>
 
@@ -83,7 +83,7 @@ $(function() {
 @else
 	<table class="table" >
 			<tr class="danger">
-				<td><strong>No existe ningun registro</strong></td>
+				<td><strong>No existe ning&uacute;n registro</strong></td>
 			</tr>
 	</table>
 @endif
@@ -102,7 +102,7 @@ $(function() {
 {{Form::open(array('url'=>'/consultora/more_activity','method'=>'GET'))}}
 	<div style='font-size:16;'>
 		<ul class="breadcrumb">
-		  <li>Ultimas 5 Actividades</li>
+		  <li>&uacute;ltimas 5 Actividades</li>
 		</ul>
 	</div>
 	
@@ -129,7 +129,7 @@ $(function() {
 @else
 	<table class="table" >
 			<tr class="danger">
-				<td><strong>No existe ningun registro</strong></td>
+				<td><strong>No existe ning&uacute;n registro</strong></td>
 			</tr>
 	</table>
 @endif

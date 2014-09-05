@@ -45,6 +45,7 @@ Route::post('/empresa/create', 'UserController@store');
 
 Route::post('/empresa/show', 'UserController@show');
 Route::get('/empresa/buscar/nombre', 'UserController@buscarNombre');
+Route::get('/empresa/buscar/nombre2', 'UserController@buscarNombre2');
 Route::get('/empresa/buscar/cedula', 'UserController@buscarCedula');
 Route::get('/empresa/buscar/profesion', 'UserController@buscarProfesion');
 Route::get('/empresa/verUsuario/{id}','UserController@verUsuario');

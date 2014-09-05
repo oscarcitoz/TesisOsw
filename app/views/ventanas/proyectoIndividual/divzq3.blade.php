@@ -89,7 +89,7 @@
 	<fieldset class="form-group col-md-8">
 		<table class="table" >
 			<tr class="danger">
-				<td><strong>No existe ningun documento guardado</strong></td>
+				<td><strong>No existe ning&uacute;n documento guardado</strong></td>
 			</tr>
 		</table>
 	</fieldset>

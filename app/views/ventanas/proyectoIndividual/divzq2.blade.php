@@ -62,8 +62,8 @@
 		@endif
 	</div>
 
-	<div class="row">
 		@if ($project->status != "Paralizado" and $project->status != "Cerrado" and $project->status != "Finalizado" and $project->user_id==Auth::user()->id)
+	<div class="row">
 			{{Form::open(array('url'=>'/project/individual/actualizaDocument','files'=>true,'method'=>'post', 'id'=>'formulario_project'))}}
 			{{ Form::hidden('invisible', $project->id, array('id' => 'invisible_id')) }}
 			<fieldset class="form-group col-md-8">
@@ -78,15 +78,18 @@
 			<fieldset class="form-group col-md-8">
 				<input type="submit" class="btn btn-primary btn-lg" value="Subir Archivo del Presupuesto"/>  
 			</fieldset>
+	</div>
 			{{Form::close()}}
 		@endif
 		@if ($project->document_budget !== null)
+		<fieldset class="form-group col-md-5">
 			<a class="btn btn-primary btn-lg" href="{{asset($project->document_budget)}}" download={{$nombre}}><img class="img-rounded" width="20" src="{{asset('images/descargar.png')}}" alt="Descargar Archivo">Descargar Archivo</a>
+		</fieldset>
 		@else
 			<fieldset class="form-group col-md-8">
 				<table class="table" >
 					<tr class="danger">
-						<td><strong>No existe ningun presupuesto guardado</strong></td>
+						<td><strong>No existe ning&uacute;n presupuesto guardado</strong></td>
 					</tr>
 				</table>
 			</fieldset>
@@ -95,7 +98,6 @@
 
 
 
-	</div>
 
 
 </div>

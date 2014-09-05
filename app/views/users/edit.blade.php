@@ -69,7 +69,7 @@ Perfil
 </fieldset>
 
 <fieldset class="form-group col-md-5">
-{{Form::label('cedula', 'Cedula: ')}}
+{{Form::label('cedula', 'C&eacute;dula: ')}}
 @if($errors->has('cedula'))
     {{Form::label('cedula',$errors->first('cedula'),array('class'=>'label label-warning'))}}
     @endif

@@ -22,7 +22,7 @@ Mi Consultora
 <div name="izq" id="Dizq1">
 	<div style='font-size:16;'>
 	<ul class="breadcrumb">
-	  <li><a href="{{URL::to('/consultora')}}">Ultimos 5 Proyectos</a></li>
+	  <li><a href="{{URL::to('/consultora')}}">&uacute;ltimos 5 Proyectos</a></li>
 	  <li class="active">Todos Los Proyectos</li>
 	</ul>
 	</div>
@@ -57,7 +57,7 @@ Mi Consultora
 {{Form::open(array('url'=>'/consultora/more_activity','method'=>'GET'))}}
 	<div style='font-size:16;'>
 		<ul class="breadcrumb">
-		  <li>Ultimas 5 Actividades</li>
+		  <li>&uacute;ltimas 5 Actividades</li>
 		</ul>
 	</div>
 	
@@ -84,7 +84,7 @@ Mi Consultora
 @else
 	<table class="table" >
 			<tr class="danger">
-				<td><strong>No existe ningun registro</strong></td>
+				<td><strong>No existe ning&uacute;n registro</strong></td>
 			</tr>
 	</table>
 @endif

@@ -168,7 +168,7 @@ $( "#tags" ).keydown(function(tecla){
                     var urlita="";
                     
                     var datos="<table class='table table-striped table-hover'> ";
-                    datos+="<thead><tr><th>Id</th><th>Nombre y Apellido</th><th>Cedula</th>";
+                    datos+="<thead><tr><th>Id</th><th>Nombre y Apellido</th><th>C&eacute;dula</th>";
                     datos+="<th>Profesi&oacute;n</th>  <th>Status</th></tr></thead>";
                     datos+="<tbody>";
                     for (i = 0; i < respuesta.length; i++) {
@@ -176,6 +176,7 @@ $( "#tags" ).keydown(function(tecla){
                       urlita='';
                       if(respuesta[i].user_id==undefined){
                     datico = respuesta[i].status;
+                    datico= datico==1?"Activo" : "Inactivo";
                      datos+="<tr>";
                      urlita="{{URL::to('empresa/verUsuario/')}}";
                      urlita+="/"+respuesta[i].employee.user_id;

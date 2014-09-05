@@ -7,6 +7,14 @@ Usuario
  @parent
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 <script type="text/javascript">
+$(function() {
+$( "#formulario_project" ).submit(function( event ) {
+ 
+ var cadena=$("#email").val();
+ cadena=cadena.toLowerCase();
+ $("#email").val(cadena);
+});
+});
 </script>
  @stop
 @section('container')

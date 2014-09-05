@@ -28,7 +28,7 @@
 @else
 	<table class="table" >
 			<tr class="danger">
-				<td><strong>No existe ningun registro</strong></td>
+				<td><strong>No existe ning&uacute;n registro</strong></td>
 			</tr>
 	</table>
 @endif
