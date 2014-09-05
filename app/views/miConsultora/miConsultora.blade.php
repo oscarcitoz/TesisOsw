@@ -56,7 +56,7 @@ $(function() {
 {{Form::open(array('url'=>'/consultora/more_project','method'=>'GET'))}}
 	<div style='font-size:16;'>
 		<ul class="breadcrumb">
-		  <li>&uacute;ltimos 5 Proyectos</li>
+		  <li>&Uacute;ltimos 5 Proyectos</li>
 		</ul>
 	</div>
 
@@ -102,7 +102,7 @@ $(function() {
 {{Form::open(array('url'=>'/consultora/more_activity','method'=>'GET'))}}
 	<div style='font-size:16;'>
 		<ul class="breadcrumb">
-		  <li>&uacute;ltimas 5 Actividades</li>
+		  <li>&Uacute;ltimas 5 Actividades</li>
 		</ul>
 	</div>
 	
